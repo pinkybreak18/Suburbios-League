@@ -1,14 +1,23 @@
-.top-right-logo {
-  position: fixed;
-  top: 10px;
-  right: 10px;
-  width: 50px;
-  height: 50px;
-  z-index: 1000;
-}
-.top-right-logo img {
-  width: 100%;
-  height: auto;
-  border-radius: 5px;
-  cursor: pointer;
+/* Ajustes específicos para móviles */
+@media (max-width: 600px) {
+  .equipo-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .jugadores {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+  }
+
+  .jugador {
+    padding: 10px 16px;
+    font-size: 16px;
+    margin: 5px;
+    border-radius: 20px;
+    background-color: #f8f1ec;
+  }
 }
