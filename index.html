@@ -8,23 +8,23 @@
   <!-- Importar la fuente Poppins -->
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
   <style>
-    /* Fondo y tipografía general */
+    /* Fondo general y tipografía */
     body {
       font-family: 'Poppins', sans-serif;
       margin: 0;
       padding: 20px;
-      background-color: #FAF3DD;
+      background-color: #FAF3DD; /* Color crema */
       color: #4A2C2A;
     }
     
-    /* Logo superior derecho para el ícono de Instagram */
+    /* Bloque de logo superior derecho (opcional) */
     .top-right-logo {
       position: fixed;
       top: 10px;
       right: 10px;
-      width: 30px; /* reducido de 50px */
-      height: 30px; /* reducido de 50px */
-      z-index: 50; /* z-index menor para que no tape el contenido */
+      width: 30px;
+      height: 30px;
+      z-index: 50;
     }
     .top-right-logo img {
       width: 100%;
@@ -33,7 +33,7 @@
       cursor: pointer;
     }
     
-    /* Cabecera: Título e imagen del árbol alineados */
+    /* Cabecera: Título e imagen del árbol */
     header {
       display: flex;
       align-items: center;
@@ -80,7 +80,7 @@
       max-height: 0;
       overflow: hidden;
       opacity: 0;
-      background-color: #F2D7D9;
+      background-color: #F2D7D9; /* Tonos rosáceo-burdeos */
       padding: 0 20px;
       margin-bottom: 20px;
       border-radius: 5px;
@@ -191,38 +191,46 @@
       color: #4A2C2A;
     }
     
-    /* Sección de Equipos: Alineaciones en grid 2x2 */
-    #sectionEquipos .teams-container {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
+    /* Sección de Equipos: Tarjetas colapsables */
+    #sectionEquipos .team-cards {
+      display: flex;
+      flex-direction: column;
       gap: 15px;
     }
-    #sectionEquipos .team-lineup {
-      background-color: #fff;
+    .team-card {
       border: 1px solid #E6B0AA;
       border-radius: 5px;
+      overflow: hidden;
+    }
+    .team-card .card-header {
       padding: 10px;
-      box-shadow: 2px 2px 5px rgba(74,44,42,0.15);
-      max-width: 300px;
-      margin: 0 auto;
-    }
-    #sectionEquipos .team-lineup h3 {
-      margin-top: 0;
+      font-size: 18px;
+      font-weight: 600;
       color: #fff;
-      padding: 8px;
-      border-radius: 5px 5px 0 0;
+      cursor: pointer;
     }
-    .drink-team h3 { background-color: #800080; }
-    .cepilla h3 { background-color: #808080; }
-    .recreativo h3 { background-color: #FFD700; color: #4A2C2A; }
-    .borussia h3 { background-color: #00CCCC; }
-    /* Alineación (Formación 1-3-2-1) */
-    #sectionEquipos .lineup {
+    /* Colores para cada equipo */
+    .team-card.drink-team .card-header { background-color: #800080; }
+    .team-card.cepilla .card-header { background-color: #808080; }
+    .team-card.recreativo .card-header { background-color: #FFD700; color: #4A2C2A; }
+    .team-card.borussia .card-header { background-color: #00CCCC; }
+    .team-card .card-body {
+      display: none;
+      padding: 10px;
+    }
+    .team-card.active .card-body {
+      display: block;
+    }
+    .lineup {
       display: flex;
       flex-direction: column;
       align-items: center;
       gap: 10px;
-      padding-bottom: 10px;
+    }
+    .defense, .midfield {
+      display: flex;
+      gap: 10px;
+      justify-content: center;
     }
     .position {
       font-size: 16px;
@@ -231,39 +239,21 @@
       background-color: #F9F3F3;
       padding: 5px 10px;
       border-radius: 20px;
-      min-width: 80px;
       text-align: center;
-    }
-    .defense {
-      display: flex;
-      justify-content: space-around;
-      width: 100%;
-    }
-    .midfield {
-      display: flex;
-      justify-content: space-around;
-      width: 60%;
+      min-width: 70px;
     }
     
     /* Media Queries para móviles */
     @media (max-width: 600px) {
-      header h1 { 
-        font-size: 2em; 
+      header h1 { font-size: 2em; }
+      .nav-container button { font-size: 14px; padding: 10px 20px; }
+      #sectionClasificacion table { font-size: 14px; }
+      #sectionEquipos .teams-container,
+      #sectionEquipos .team-cards { 
+        /* En móviles, mostramos los cards en una sola columna */
+        flex-direction: column;
       }
-      .nav-container button { 
-        font-size: 14px; 
-        padding: 10px 20px; 
-      }
-      #sectionClasificacion table {
-        font-size: 14px;
-      }
-      #sectionEquipos .teams-container {
-        grid-template-columns: 1fr;
-      }
-      .stat-card {
-        padding: 10px;
-        font-size: 16px;
-      }
+      .stat-card { padding: 10px; font-size: 16px; }
     }
   </style>
   <link rel="manifest" href="manifest.json">
@@ -273,7 +263,7 @@
     <h1>Suburbios Legaue</h1>
     <img src="https://i.imgur.com/9Hx9mZ4.jpeg" alt="Imagen de Árbol">
   </header>
-
+  
   <!-- Navegación de categorías -->
   <div class="nav-container">
     <button id="btnClasificacion">Clasificación</button>
@@ -281,7 +271,7 @@
     <button id="btnNoticias">Noticias</button>
     <button id="btnEquipos">Equipos</button>
   </div>
-
+  
   <!-- Sección de Clasificación -->
   <section id="sectionClasificacion">
     <h2>Clasificación</h2>
@@ -318,7 +308,7 @@
       </tbody>
     </table>
   </section>
-
+  
   <!-- Sección de Estadísticas -->
   <section id="sectionEstadisticas">
     <h2>Estadísticas</h2>
@@ -345,7 +335,7 @@
       </div>
     </div>
   </section>
-
+  
   <!-- Sección de Noticias -->
   <section id="sectionNoticias">
     <h2>Noticias</h2>
@@ -355,92 +345,101 @@
       <li>Noticia 3: Entrevista a un jugador destacado.</li>
     </ul>
   </section>
-
-  <!-- Sección de Equipos: Alineaciones en grid 2x2 -->
+  
+  <!-- Sección de Equipos: Tarjetas colapsables -->
   <section id="sectionEquipos">
     <h2>Equipos</h2>
-    <div class="teams-container">
-      <!-- DRINK TEAM -->
-      <div class="team-lineup drink-team">
-        <h3>DRINK TEAM</h3>
-        <div class="lineup">
-          <div class="position portero">Fran</div>
-          <div class="defense" style="width:100%; display:flex; justify-content:space-around;">
-            <div class="position">Raul</div>
-            <div class="position">Juan</div>
-            <div class="position">Alvaro</div>
+    <div class="team-cards">
+      <!-- Card DRINK TEAM -->
+      <div class="team-card drink-team">
+        <div class="card-header">DRINK TEAM</div>
+        <div class="card-body">
+          <div class="lineup">
+            <div class="position portero">Fran</div>
+            <div class="defense">
+              <div class="position">Raul</div>
+              <div class="position">Juan</div>
+              <div class="position">Alvaro</div>
+            </div>
+            <div class="midfield">
+              <div class="position">Lay</div>
+              <div class="position">Kuki</div>
+            </div>
+            <div class="position delantero">Nacho</div>
           </div>
-          <div class="midfield" style="width:60%; display:flex; justify-content:space-around;">
-            <div class="position">Lay</div>
-            <div class="position">Kuki</div>
-          </div>
-          <div class="position delantero">Nacho</div>
         </div>
       </div>
-      <!-- CEPILLA FC -->
-      <div class="team-lineup cepilla">
-        <h3>CEPILLA FC</h3>
-        <div class="lineup">
-          <div class="position portero">Sami</div>
-          <div class="defense" style="width:100%; display:flex; justify-content:space-around;">
-            <div class="position">Marko</div>
-            <div class="position">HDG</div>
-            <div class="position">Mariankas</div>
+      <!-- Card CEPILLA FC -->
+      <div class="team-card cepilla">
+        <div class="card-header">CEPILLA FC</div>
+        <div class="card-body">
+          <div class="lineup">
+            <div class="position portero">Sami</div>
+            <div class="defense">
+              <div class="position">Marko</div>
+              <div class="position">HDG</div>
+              <div class="position">Mariankas</div>
+            </div>
+            <div class="midfield">
+              <div class="position">Juan L</div>
+              <div class="position">Nestor</div>
+            </div>
+            <div class="position delantero">Curro</div>
           </div>
-          <div class="midfield" style="width:60%; display:flex; justify-content:space-around;">
-            <div class="position">Juan L</div>
-            <div class="position">Nestor</div>
-          </div>
-          <div class="position delantero">Curro</div>
         </div>
       </div>
-      <!-- RECREATIVO DE JUERGA -->
-      <div class="team-lineup recreativo">
-        <h3>RECREATIVO DE JUERGA</h3>
-        <div class="lineup">
-          <div class="position portero">Antonio</div>
-          <div class="defense" style="width:100%; display:flex; justify-content:space-around;">
-            <div class="position">Viktor</div>
-            <div class="position">Leo</div>
-            <div class="position">Robles</div>
+      <!-- Card RECREATIVO DE JUERGA -->
+      <div class="team-card recreativo">
+        <div class="card-header">RECREATIVO DE JUERGA</div>
+        <div class="card-body">
+          <div class="lineup">
+            <div class="position portero">Antonio</div>
+            <div class="defense">
+              <div class="position">Viktor</div>
+              <div class="position">Leo</div>
+              <div class="position">Robles</div>
+            </div>
+            <div class="midfield">
+              <div class="position">Victor</div>
+              <div class="position">Juanma</div>
+            </div>
+            <div class="position delantero">Alex F.</div>
           </div>
-          <div class="midfield" style="width:60%; display:flex; justify-content:space-around;">
-            <div class="position">Victor</div>
-            <div class="position">Juanma</div>
-          </div>
-          <div class="position delantero">Alex F.</div>
         </div>
       </div>
-      <!-- BORUSSIA DONUTS -->
-      <div class="team-lineup borussia">
-        <h3>BORUSSIA DONUTS</h3>
-        <div class="lineup">
-          <div class="position portero">Adri</div>
-          <div class="defense" style="width:100%; display:flex; justify-content:space-around;">
-            <div class="position">Niko</div>
-            <div class="position">Carlos</div>
-            <div class="position">Alcaina</div>
+      <!-- Card BORUSSIA DONUTS -->
+      <div class="team-card borussia">
+        <div class="card-header">BORUSSIA DONUTS</div>
+        <div class="card-body">
+          <div class="lineup">
+            <div class="position portero">Adri</div>
+            <div class="defense">
+              <div class="position">Niko</div>
+              <div class="position">Carlos</div>
+              <div class="position">Alcaina</div>
+            </div>
+            <div class="midfield">
+              <div class="position">Esteban</div>
+              <div class="position">Alvaro</div>
+            </div>
+            <div class="position delantero">Fer</div>
           </div>
-          <div class="midfield" style="width:60%; display:flex; justify-content:space-around;">
-            <div class="position">Esteban</div>
-            <div class="position">Alvaro</div>
-          </div>
-          <div class="position delantero">Fer</div>
         </div>
       </div>
     </div>
   </section>
-
-  <!-- JavaScript para generar datos fijos (0) en las estadísticas -->
+  
+  <!-- JavaScript para generar datos fijos (0) en estadísticas -->
   <script>
-    // Arrays de jugadores para estadísticas, con colores
+    // Arrays de jugadores para estadísticas, con colores asignados.
     const playersStats = [
-      { name: "Viktor", color: "#FFD700" },    // Recreativo
-      { name: "Juan L", color: "#808080" },      // Cepilla
-      { name: "Raul", color: "#800080" },         // Drink
-      { name: "Curro", color: "#808080" },        // Cepilla
-      { name: "Fer", color: "#00CCCC" }           // Borussia
+      { name: "Viktor", color: "#FFD700" },    // Recreativo: amarillo
+      { name: "Juan L", color: "#808080" },      // Cepilla: gris
+      { name: "Raul", color: "#800080" },         // Drink: morado
+      { name: "Curro", color: "#808080" },        // Cepilla: gris
+      { name: "Fer", color: "#00CCCC" }           // Borussia: celeste
     ];
+    // Porteros para Goles Recibidos.
     const porteros = [
       { name: "Fran", color: "#800080" },        // Drink
       { name: "Sami", color: "#808080" },          // Cepilla
@@ -468,6 +467,7 @@
       generateStats(document.getElementById("ulGolesRecibidos"), porteros);
     });
     
+    // Alternar visibilidad de secciones (similares a los otros apartados)
     const btnClasificacion = document.getElementById("btnClasificacion");
     const btnEstadisticas = document.getElementById("btnEstadisticas");
     const btnNoticias = document.getElementById("btnNoticias");
@@ -534,8 +534,23 @@
         btnEquipos.textContent = "Equipos";
       }
     });
+    
+    // Lógica para los cards de Equipos: Collapsible team cards
+    document.querySelectorAll('.team-card .card-header').forEach(header => {
+      header.addEventListener('click', () => {
+        const currentCard = header.parentElement;
+        // Cerrar los demás team cards
+        document.querySelectorAll('.team-card').forEach(card => {
+          if(card !== currentCard) {
+            card.classList.remove('active');
+          }
+        });
+        // Alternar el estado del team card actual
+        currentCard.classList.toggle('active');
+      });
+    });
   </script>
-
+  
   <!-- Bloque de ícono de Instagram en la esquina superior derecha -->
   <div class="top-right-logo">
     <a href="https://www.instagram.com/suburbiosleague/" target="_blank" title="Instagram">
