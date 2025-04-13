@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#000000">
+  <meta charset="UTF-8">
+  <title>subur</title>
+  <link rel="stylesheet" href="./style.css">
+
+</head>
+<script>
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('sw.js').then(() => {
+      console.log('Service Worker registrado');
+    });
+  }
+</script>
+<body>
+<!-- partial:index.partial.html -->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Suburbios Legaue</title>
+  <!-- Importar la fuente Poppins de Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    /* Fondo de la página y tipografía */
+    body {
+      font-family: 'Poppins', sans-serif;
+      margin: 0;
+      padding: 20px;
+      background-color: #FAF3DD; /* Color crema */
+      color: #4A2C2A;
+    }
+    
+    /* Bloque de logo superior derecho */
+    .top-right-logo {
+      position: fixed;
+      top: 10px;
+      right: 10px;
+      width: 50px;
+      height: 50px;
+      z-index: 1000;
+    }
+    .top-right-logo img {
+      width: 100%;
+      height: auto;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    
+    /* Cabecera: Título e imagen alineados */
+    header {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      margin-bottom: 20px;
+    }
+    header h1 {
+      margin: 0;
+      font-size: 2.5em;
+    }
+    header img {
+      width: 80px;
+      height: 80px;
+      object-fit: cover;
+      border-radius: 50%;
+    }
+    
+    /* Navegación de categorías */
+    .nav-container {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+    }
+    .nav-container button {
+      background: linear-gradient(145deg, #F2D7D9, #E6B0AA);
+      border: none;
+      padding: 12px 24px;
+      border-radius: 30px;
+      cursor: pointer;
+      font-size: 16px;
+      color: #4A2C2A;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      box-shadow: 3px 3px 6px rgba(74,44,42,0.3);
+    }
+    .nav-container button:hover {
+      transform: scale(1.05);
+      box-shadow: 4px 4px 8px rgba(74,44,42,0.4);
+    }
+    
+    /* Secciones principales */
+    section {
+      max-height: 0;
+      overflow: hidden;
+      opacity: 0;
+      background-color: #F2D7D9; /* Tonos rosáceo-burdeos */
+      padding: 0 20px;
+      margin-bottom: 20px;
+      border-radius: 5px;
+      box-shadow: 0 2px 4px rgba(74,44,42,0.2);
+      transition: max-height 0.5s ease-out, opacity 0.5s ease;
+    }
+    section.visible {
+      opacity: 1;
+      padding: 20px;
+      max-height: 1000px; /* Valor lo suficientemente alto para el contenido */
+    }
+    section h2 {
+      color: #4A2C2A;
+      border-bottom: 2px solid #4A2C2A;
+      padding-bottom: 5px;
+      margin-bottom: 15px;
+    }
+    
+    /* Sección de Clasificación: Tabla */
+    #sectionClasificacion table {
+      width: 100%;
+      border-collapse: collapse;
+      background-color: #fff;
+    }
+    #sectionClasificacion th,
+    #sectionClasificacion td {
+      padding: 8px;
+      text-align: center;
+      border: 1px solid #ddd;
+    }
+    #sectionClasificacion thead {
+      background-color: #4A2C2A;
+      color: #fff;
+    }
+    .team-name {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .color-indicator {
+      display: inline-block;
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+    }
+    .drink-team .color-indicator { background-color: #800080; }
+    .recreativo .color-indicator { background-color: #FFD700; }
+    .cepilla .color-indicator { background-color: #808080; }
+    .borussia .color-indicator { background-color: #00FFFF; }
+    
+    /* Sección de Estadísticas: Tarjetas */
+    .stats-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 15px;
+    }
+    .stat-card {
+      background: linear-gradient(145deg, #ffffff, #f9f9f9);
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      padding: 15px;
+      text-align: center;
+      box-shadow: 2px 2px 5px rgba(74,44,42,0.15);
+      transition: transform 0.2s ease;
+    }
+    .stat-card:hover {
+      transform: translateY(-5px);
+    }
+    .stat-card h3 {
+      margin: 0 0 10px;
+      color: #4A2C2A;
+      font-size: 20px;
+    }
+    .stat-card ul {
+      padding: 0;
+      list-style: none;
+    }
+    .stat-card ul li {
+      font-size: 18px;
+      margin: 5px 0;
+      font-weight: 600;
+      color: #4A2C2A;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .stat-card ul li span {
+      display: inline-block;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+    }
+    
+    /* Sección de Noticias: Lista */
+    #sectionNoticias ul {
+      padding: 0;
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    #sectionNoticias ul li {
+      padding: 10px;
+      background-color: #fff;
+      border-left: 5px solid #E6B0AA;
+      border-radius: 4px;
+      font-size: 18px;
+      color: #4A2C2A;
+    }
+    
+    /* Sección de Equipos: Alineaciones en grid 2x2 */
+    #sectionEquipos .teams-container {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 15px;
+    }
+    #sectionEquipos .team-lineup {
+      background-color: #fff;
+      border: 1px solid #E6B0AA;
+      border-radius: 5px;
+      padding: 10px;
+      box-shadow: 2px 2px 5px rgba(74,44,42,0.15);
+      max-width: 300px;
+      margin: 0 auto;
+    }
+    #sectionEquipos .team-lineup h3 {
+      margin-top: 0;
+      color: #fff;
+      padding: 8px;
+      border-radius: 5px 5px 0 0;
+    }
+    .drink-team h3 { background-color: #800080; }
+    .cepilla h3 { background-color: #808080; }
+    .recreativo h3 { background-color: #FFD700; color: #4A2C2A; }
+    .borussia h3 { background-color: #00CCCC; }
+    /* Formación 1-3-2-1 */
+    #sectionEquipos .lineup {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+      padding-bottom: 10px;
+    }
+    .position {
+      font-size: 16px;
+      font-weight: 600;
+      color: #4A2C2A;
+      background-color: #F9F3F3;
+      padding: 5px 10px;
+      border-radius: 20px;
+      min-width: 80px;
+      text-align: center;
+    }
+    .defense {
+      display: flex;
+      justify-content: space-around;
+      width: 100%;
+    }
+    .midfield {
+      display: flex;
+      justify-content: space-around;
+      width: 60%;
+    }
+    
+    /* Responsive */
+    @media (max-width: 600px) {
+      header h1 { font-size: 2em; }
+      .nav-container button { font-size: 14px; padding: 10px 20px; }
+    }
+  </style>
+  <link rel="manifest" href="manifest.json">
+</head>
+<body>
+  <header>
+    <h1>Suburbios Legaue</h1>
+    <img src="https://i.imgur.com/9Hx9mZ4.jpeg" alt="Imagen de Árbol">
+  </header>
+
+  <!-- Navegación de categorías -->
+  <div class="nav-container">
+    <button id="btnClasificacion">Clasificación</button>
+    <button id="btnEstadisticas">Estadísticas</button>
+    <button id="btnNoticias">Noticias</button>
+    <button id="btnEquipos">Equipos</button>
+  </div>
+
+  <!-- Sección de Clasificación -->
+  <section id="sectionClasificacion">
+    <h2>Clasificación</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Equipo</th>
+          <th>PJ</th>
+          <th>PG</th>
+          <th>PE</th>
+          <th>PP</th>
+          <th>GM</th>
+          <th>GR</th>
+          <th>PTS</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="drink-team">
+          <td class="team-name"><span class="color-indicator"></span>DRINK TEAM</td>
+          <td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td>
+        </tr>
+        <tr class="cepilla">
+          <td class="team-name"><span class="color-indicator"></span>CEPILLA FC</td>
+          <td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td>
+        </tr>
+        <tr class="recreativo">
+          <td class="team-name"><span class="color-indicator"></span>RECREATIVO DE JUERGA</td>
+          <td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td>
+        </tr>
+        <tr class="borussia">
+          <td class="team-name"><span class="color-indicator"></span>BORUSSIA DONUTS</td>
+          <td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- Sección de Estadísticas -->
+  <section id="sectionEstadisticas">
+    <h2>Estadísticas</h2>
+    <div class="stats-container">
+      <div class="stat-card">
+        <h3>Goles</h3>
+        <ul id="ulGoles"></ul>
+      </div>
+      <div class="stat-card">
+        <h3>Asistencias</h3>
+        <ul id="ulAsistencias"></ul>
+      </div>
+      <div class="stat-card">
+        <h3>Goles Recibidos</h3>
+        <ul id="ulGolesRecibidos"></ul>
+      </div>
+      <div class="stat-card">
+        <h3>Tarjetas Amarillas</h3>
+        <ul id="ulTarjetasAmarillas"></ul>
+      </div>
+      <div class="stat-card">
+        <h3>Tarjetas Rojas</h3>
+        <ul id="ulTarjetasRojas"></ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- Sección de Noticias -->
+  <section id="sectionNoticias">
+    <h2>Noticias</h2>
+    <ul>
+      <li>Noticia 1: Resumen de la jornada.</li>
+      <li>Noticia 2: Rumores sobre el próximo partido.</li>
+      <li>Noticia 3: Entrevista a un jugador destacado.</li>
+    </ul>
+  </section>
+
+  <!-- Sección de Equipos: Alineaciones en grid 2x2 -->
+  <section id="sectionEquipos">
+    <h2>Equipos</h2>
+    <div class="teams-container">
+      <!-- DRINK TEAM -->
+      <div class="team-lineup drink-team">
+        <h3>DRINK TEAM</h3>
+        <div class="lineup">
+          <div class="position portero">Fran</div>
+          <div class="defense" style="width:100%; display:flex; justify-content:space-around;">
+            <div class="position">Raul</div>
+            <div class="position">Juan</div>
+            <div class="position">Alvaro</div>
+          </div>
+          <div class="midfield" style="width:60%; display:flex; justify-content:space-around;">
+            <div class="position">Lay</div>
+            <div class="position">Kuki</div>
+          </div>
+          <div class="position delantero">Nacho</div>
+        </div>
+      </div>
+      <!-- CEPILLA FC -->
+      <div class="team-lineup cepilla">
+        <h3>CEPILLA FC</h3>
+        <div class="lineup">
+          <div class="position portero">Sami</div>
+          <div class="defense" style="width:100%; display:flex; justify-content:space-around;">
+            <div class="position">Marko</div>
+            <div class="position">HDG</div>
+            <div class="position">Mariankas</div>
+          </div>
+          <div class="midfield" style="width:60%; display:flex; justify-content:space-around;">
+            <div class="position">Juan L</div>
+            <div class="position">Nestor</div>
+          </div>
+          <div class="position delantero">Curro</div>
+        </div>
+      </div>
+      <!-- RECREATIVO DE JUERGA -->
+      <div class="team-lineup recreativo">
+        <h3>RECREATIVO DE JUERGA</h3>
+        <div class="lineup">
+          <div class="position portero">Antonio</div>
+          <div class="defense" style="width:100%; display:flex; justify-content:space-around;">
+            <div class="position">Viktor</div>
+            <div class="position">Leo</div>
+            <div class="position">Robles</div>
+          </div>
+          <div class="midfield" style="width:60%; display:flex; justify-content:space-around;">
+            <div class="position">Victor</div>
+            <div class="position">Juanma</div>
+          </div>
+          <div class="position delantero">Alex F.</div>
+        </div>
+      </div>
+      <!-- BORUSSIA DONUTS -->
+      <div class="team-lineup borussia">
+        <h3>BORUSSIA DONUTS</h3>
+        <div class="lineup">
+          <div class="position portero">Adri</div>
+          <div class="defense" style="width:100%; display:flex; justify-content:space-around;">
+            <div class="position">Niko</div>
+            <div class="position">Carlos</div>
+            <div class="position">Alcaina</div>
+          </div>
+          <div class="midfield" style="width:60%; display:flex; justify-content:space-around;">
+            <div class="position">Esteban</div>
+            <div class="position">Alvaro</div>
+          </div>
+          <div class="position delantero">Fer</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- JavaScript para generar datos fijos (0) en las estadísticas -->
+  <script>
+    // Arrays de jugadores para estadísticas, con color asignado según equipo.
+    const playersStats = [
+      { name: "Viktor", color: "#FFD700" },    // Recreativo (amarillo)
+      { name: "Juan L", color: "#808080" },      // Cepilla (gris)
+      { name: "Raul", color: "#800080" },         // Drink (morado)
+      { name: "Curro", color: "#808080" },        // Cepilla (gris)
+      { name: "Fer", color: "#00CCCC" }           // Borussia (celeste)
+    ];
+    // Porteros para Goles Recibidos (solo porteros)
+    const porteros = [
+      { name: "Fran", color: "#800080" },        // Drink
+      { name: "Sami", color: "#808080" },          // Cepilla
+      { name: "Antonio", color: "#FFD700" },       // Recreativo
+      { name: "Adri", color: "#00CCCC" }           // Borussia
+    ];
+    
+    // Función para generar la lista con valores fijos (0)
+    function generateStats(listEl, players) {
+      listEl.innerHTML = "";
+      players.forEach(player => {
+        const li = document.createElement("li");
+        const span = document.createElement("span");
+        span.style.backgroundColor = player.color;
+        li.appendChild(span);
+        li.appendChild(document.createTextNode(`${player.name}: 0`));
+        listEl.appendChild(li);
+      });
+    }
+    
+    window.addEventListener("load", () => {
+      generateStats(document.getElementById("ulGoles"), playersStats);
+      generateStats(document.getElementById("ulAsistencias"), playersStats);
+      generateStats(document.getElementById("ulTarjetasAmarillas"), playersStats);
+      generateStats(document.getElementById("ulTarjetasRojas"), playersStats);
+      generateStats(document.getElementById("ulGolesRecibidos"), porteros);
+    });
+    
+    // Alternar visibilidad de secciones
+    const btnClasificacion = document.getElementById("btnClasificacion");
+    const btnEstadisticas = document.getElementById("btnEstadisticas");
+    const btnNoticias = document.getElementById("btnNoticias");
+    const btnEquipos = document.getElementById("btnEquipos");
+    
+    const sectionClasificacion = document.getElementById("sectionClasificacion");
+    const sectionEstadisticas = document.getElementById("sectionEstadisticas");
+    const sectionNoticias = document.getElementById("sectionNoticias");
+    const sectionEquipos = document.getElementById("sectionEquipos");
+    
+    const sections = [sectionClasificacion, sectionEstadisticas, sectionNoticias, sectionEquipos];
+    const buttons = [btnClasificacion, btnEstadisticas, btnNoticias, btnEquipos];
+    
+    function cerrarSecciones() {
+      sections.forEach(sec => sec.classList.remove("visible"));
+      buttons.forEach(btn => {
+        if (btn === btnClasificacion) btn.textContent = "Clasificación";
+        if (btn === btnEstadisticas) btn.textContent = "Estadísticas";
+        if (btn === btnNoticias) btn.textContent = "Noticias";
+        if (btn === btnEquipos) btn.textContent = "Equipos";
+      });
+    }
+    
+    btnClasificacion.addEventListener("click", () => {
+      if (!sectionClasificacion.classList.contains("visible")) {
+        cerrarSecciones();
+        sectionClasificacion.classList.add("visible");
+        btnClasificacion.textContent = "Ocultar Clasificación";
+      } else {
+        sectionClasificacion.classList.remove("visible");
+        btnClasificacion.textContent = "Clasificación";
+      }
+    });
+    
+    btnEstadisticas.addEventListener("click", () => {
+      if (!sectionEstadisticas.classList.contains("visible")) {
+        cerrarSecciones();
+        sectionEstadisticas.classList.add("visible");
+        btnEstadisticas.textContent = "Ocultar Estadísticas";
+      } else {
+        sectionEstadisticas.classList.remove("visible");
+        btnEstadisticas.textContent = "Estadísticas";
+      }
+    });
+    
+    btnNoticias.addEventListener("click", () => {
+      if (!sectionNoticias.classList.contains("visible")) {
+        cerrarSecciones();
+        sectionNoticias.classList.add("visible");
+        btnNoticias.textContent = "Ocultar Noticias";
+      } else {
+        sectionNoticias.classList.remove("visible");
+        btnNoticias.textContent = "Noticias";
+      }
+    });
+    
+    btnEquipos.addEventListener("click", () => {
+      if (!sectionEquipos.classList.contains("visible")) {
+        cerrarSecciones();
+        sectionEquipos.classList.add("visible");
+        btnEquipos.textContent = "Ocultar Equipos";
+      } else {
+        sectionEquipos.classList.remove("visible");
+        btnEquipos.textContent = "Equipos";
+      }
+    });
+  </script>
+
+  <!-- Bloque de ícono de Instagram en la esquina superior derecha -->
+  <div class="top-right-logo">
+    <a href="https://www.instagram.com/suburbiosleague/" target="_blank" title="Instagram">
+      <img src="https://1000logos.net/wp-content/uploads/2017/02/New-Instagram-logo.jpg" alt="Instagram Logo">
+    </a>
+  </div>
+  
+  <style>
+    .top-right-logo {
+      position: fixed;
+      top: 10px;
+      right: 10px;
+      width: 50px;
+      height: 50px;
+      z-index: 1000;
+    }
+    .top-right-logo img {
+      width: 100%;
+      height: auto;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+  </style>
+</body>
+</html>
+<!-- partial -->
+  <script  src="./script.js"></script>
+
+</body>
+</html>
