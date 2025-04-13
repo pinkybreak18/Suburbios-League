@@ -8,35 +8,20 @@
   <!-- Importar la fuente Poppins -->
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
   <style>
-    /* Fondo general y tipografía */
+    /* Fondo y tipografía */
     body {
       font-family: 'Poppins', sans-serif;
       margin: 0;
       padding: 20px;
-      background-color: #FAF3DD; /* Color crema */
+      background-color: #FAF3DD;
       color: #4A2C2A;
     }
     
-    /* Logo superior derecho (social icon) */
-    .top-right-logo {
-      position: fixed;
-      top: 10px;
-      right: 10px;
-      width: 50px;
-      height: 50px;
-      z-index: 1000;
-    }
-    .top-right-logo img {
-      width: 100%;
-      height: auto;
-      border-radius: 5px;
-      cursor: pointer;
-    }
-    
-    /* Cabecera: Título e imagen alineados */
+    /* Cabecera */
     header {
       display: flex;
       align-items: center;
+      justify-content: space-between;
       gap: 15px;
       margin-bottom: 20px;
     }
@@ -51,13 +36,13 @@
       border-radius: 50%;
     }
     
-    /* Navegación de categorías */
+    /* Navegación */
     .nav-container {
       display: flex;
       justify-content: center;
       gap: 10px;
-      margin-bottom: 20px;
       flex-wrap: wrap;
+      margin-bottom: 20px;
     }
     .nav-container button {
       background: linear-gradient(145deg, #F2D7D9, #E6B0AA);
@@ -75,12 +60,12 @@
       box-shadow: 4px 4px 8px rgba(74,44,42,0.4);
     }
     
-    /* Secciones principales */
+    /* Secciones */
     section {
       max-height: 0;
       overflow: hidden;
       opacity: 0;
-      background-color: #F2D7D9; /* Tonos rosáceo-burdeos */
+      background-color: #F2D7D9;
       padding: 0 20px;
       margin-bottom: 20px;
       border-radius: 5px;
@@ -90,7 +75,7 @@
     section.visible {
       opacity: 1;
       padding: 20px;
-      max-height: 1000px; /* Valor lo suficientemente alto para el contenido */
+      max-height: 1000px;
     }
     section h2 {
       color: #4A2C2A;
@@ -99,7 +84,7 @@
       margin-bottom: 15px;
     }
     
-    /* Sección de Clasificación: Tabla */
+    /* Clasificación: Tabla */
     #sectionClasificacion table {
       width: 100%;
       border-collapse: collapse;
@@ -131,7 +116,7 @@
     .cepilla .color-indicator { background-color: #808080; }
     .borussia .color-indicator { background-color: #00FFFF; }
     
-    /* Sección de Estadísticas: Tarjetas */
+    /* Estadísticas: Tarjetas */
     .stats-container {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
@@ -174,7 +159,7 @@
       border-radius: 50%;
     }
     
-    /* Sección de Noticias: Lista */
+    /* Noticias: Lista */
     #sectionNoticias ul {
       padding: 0;
       list-style: none;
@@ -191,7 +176,7 @@
       color: #4A2C2A;
     }
     
-    /* Sección de Equipos: Alineaciones en grid 2x2 */
+    /* Equipos: Alineaciones en grid 2x2 */
     #sectionEquipos .teams-container {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
@@ -216,7 +201,7 @@
     .cepilla h3 { background-color: #808080; }
     .recreativo h3 { background-color: #FFD700; color: #4A2C2A; }
     .borussia h3 { background-color: #00CCCC; }
-    /* Alineación (Formación 1-3-2-1) */
+    /* Formación 1-3-2-1 en Alineaciones */
     #sectionEquipos .lineup {
       display: flex;
       flex-direction: column;
@@ -254,15 +239,12 @@
         font-size: 14px; 
         padding: 10px 20px; 
       }
-      /* Tabla de clasificación */
       #sectionClasificacion table {
         font-size: 14px;
       }
-      /* Ajustar grid de equipos a una sola columna en móviles */
       #sectionEquipos .teams-container {
         grid-template-columns: 1fr;
       }
-      /* Reducir padding en tarjetas de estadísticas */
       .stat-card {
         padding: 10px;
         font-size: 16px;
@@ -452,7 +434,6 @@
       { name: "Adri", color: "#00CCCC" }           // Borussia
     ];
     
-    // Función para generar la lista con valores fijos (0)
     function generateStats(listEl, players) {
       listEl.innerHTML = "";
       players.forEach(player => {
@@ -473,7 +454,6 @@
       generateStats(document.getElementById("ulGolesRecibidos"), porteros);
     });
     
-    // Alternar visibilidad de secciones
     const btnClasificacion = document.getElementById("btnClasificacion");
     const btnEstadisticas = document.getElementById("btnEstadisticas");
     const btnNoticias = document.getElementById("btnNoticias");
