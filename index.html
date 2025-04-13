@@ -8,7 +8,7 @@
   <!-- Importar la fuente Poppins -->
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
   <style>
-    /* Fondo y tipografía */
+    /* Fondo y tipografía general */
     body {
       font-family: 'Poppins', sans-serif;
       margin: 0;
@@ -17,11 +17,26 @@
       color: #4A2C2A;
     }
     
-    /* Cabecera */
+    /* Logo superior derecho para el ícono de Instagram */
+    .top-right-logo {
+      position: fixed;
+      top: 10px;
+      right: 10px;
+      width: 30px; /* reducido de 50px */
+      height: 30px; /* reducido de 50px */
+      z-index: 50; /* z-index menor para que no tape el contenido */
+    }
+    .top-right-logo img {
+      width: 100%;
+      height: auto;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    
+    /* Cabecera: Título e imagen del árbol alineados */
     header {
       display: flex;
       align-items: center;
-      justify-content: space-between;
       gap: 15px;
       margin-bottom: 20px;
     }
@@ -36,7 +51,7 @@
       border-radius: 50%;
     }
     
-    /* Navegación */
+    /* Navegación de categorías */
     .nav-container {
       display: flex;
       justify-content: center;
@@ -60,7 +75,7 @@
       box-shadow: 4px 4px 8px rgba(74,44,42,0.4);
     }
     
-    /* Secciones */
+    /* Secciones principales */
     section {
       max-height: 0;
       overflow: hidden;
@@ -84,7 +99,7 @@
       margin-bottom: 15px;
     }
     
-    /* Clasificación: Tabla */
+    /* Sección de Clasificación: Tabla */
     #sectionClasificacion table {
       width: 100%;
       border-collapse: collapse;
@@ -116,7 +131,7 @@
     .cepilla .color-indicator { background-color: #808080; }
     .borussia .color-indicator { background-color: #00FFFF; }
     
-    /* Estadísticas: Tarjetas */
+    /* Sección de Estadísticas: Tarjetas */
     .stats-container {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
@@ -159,7 +174,7 @@
       border-radius: 50%;
     }
     
-    /* Noticias: Lista */
+    /* Sección de Noticias: Lista */
     #sectionNoticias ul {
       padding: 0;
       list-style: none;
@@ -176,7 +191,7 @@
       color: #4A2C2A;
     }
     
-    /* Equipos: Alineaciones en grid 2x2 */
+    /* Sección de Equipos: Alineaciones en grid 2x2 */
     #sectionEquipos .teams-container {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
@@ -201,7 +216,7 @@
     .cepilla h3 { background-color: #808080; }
     .recreativo h3 { background-color: #FFD700; color: #4A2C2A; }
     .borussia h3 { background-color: #00CCCC; }
-    /* Formación 1-3-2-1 en Alineaciones */
+    /* Alineación (Formación 1-3-2-1) */
     #sectionEquipos .lineup {
       display: flex;
       flex-direction: column;
@@ -418,15 +433,14 @@
 
   <!-- JavaScript para generar datos fijos (0) en las estadísticas -->
   <script>
-    // Arrays de jugadores para estadísticas, con color asignado según equipo.
+    // Arrays de jugadores para estadísticas, con colores
     const playersStats = [
-      { name: "Viktor", color: "#FFD700" },    // Recreativo (amarillo)
-      { name: "Juan L", color: "#808080" },      // Cepilla (gris)
-      { name: "Raul", color: "#800080" },         // Drink (morado)
-      { name: "Curro", color: "#808080" },        // Cepilla (gris)
-      { name: "Fer", color: "#00CCCC" }           // Borussia (celeste)
+      { name: "Viktor", color: "#FFD700" },    // Recreativo
+      { name: "Juan L", color: "#808080" },      // Cepilla
+      { name: "Raul", color: "#800080" },         // Drink
+      { name: "Curro", color: "#808080" },        // Cepilla
+      { name: "Fer", color: "#00CCCC" }           // Borussia
     ];
-    // Porteros para Goles Recibidos (solo porteros)
     const porteros = [
       { name: "Fran", color: "#800080" },        // Drink
       { name: "Sami", color: "#808080" },          // Cepilla
