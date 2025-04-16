@@ -13,8 +13,56 @@
       font-family: 'Poppins', sans-serif;
       margin: 0;
       padding: 20px;
-      background-color: #FAF3DD; /* Color crema */
+      background-color: #FAF3DD;
       color: #4A2C2A;
+    }
+    
+    /* Modal de perfil */
+    .modal {
+      display: none; /* Oculto por defecto */
+      position: fixed;
+      z-index: 10000;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      overflow: auto;
+      background-color: rgba(0,0,0,0.5);
+      align-items: center;
+      justify-content: center;
+    }
+    .modal-content {
+      background-color: #fff;
+      margin: auto;
+      border-radius: 8px;
+      padding: 20px;
+      width: 90%;
+      max-width: 400px;
+      box-shadow: 0 2px 4px rgba(74,44,42,0.2);
+      position: relative;
+    }
+    .modal-close {
+      position: absolute;
+      right: 10px;
+      top: 10px;
+      font-size: 20px;
+      cursor: pointer;
+      color: #4A2C2A;
+    }
+    .modal-content img {
+      width: 100%;
+      max-width: 200px;
+      border-radius: 50%;
+      display: block;
+      margin: 0 auto 20px;
+    }
+    .modal-content h1 {
+      text-align: center;
+      margin-bottom: 10px;
+    }
+    .modal-content p {
+      text-align: center;
+      margin: 10px 0;
     }
     
     /* Logo superior derecho (Instagram) */
@@ -37,9 +85,9 @@
     header {
       display: flex;
       align-items: center;
+      justify-content: space-between;
       gap: 15px;
       margin-bottom: 20px;
-      justify-content: space-between;
     }
     header h1 {
       margin: 0;
@@ -100,7 +148,7 @@
       margin-bottom: 15px;
     }
     
-    /* Sección de Clasificación: Tabla Compacta (sin PG, PE, PP) */
+    /* Sección de Clasificación: Tabla Compacta */
     #sectionClasificacion table {
       width: 100%;
       border-collapse: collapse;
@@ -117,7 +165,7 @@
       background-color: #4A2C2A;
       color: #fff;
     }
-    /* Encabezado: Equipo, PJ, GF, GC y PTS */
+    /* Encabezado: Equipo, PJ, GF, GC, PTS */
     .team-name {
       display: flex;
       align-items: center;
@@ -177,7 +225,7 @@
       border-radius: 50%;
     }
     
-    /* Sección de Noticias: Mostrar "COMING SOON" con una fuente interesante */
+    /* Sección de Noticias: "COMING SOON" */
     #sectionNoticias ul {
       padding: 0;
       list-style: none;
@@ -194,7 +242,7 @@
       margin: 0;
     }
     
-    /* Sección de Equipos: Tarjetas colapsables */
+    /* Sección de Equipos: Cards Colapsables */
     #sectionEquipos .team-cards {
       display: flex;
       flex-direction: column;
@@ -304,7 +352,7 @@
     </table>
   </section>
   
-  <!-- Sección de Estadísticas (Nombres con enlaces a perfil) -->
+  <!-- Sección de Estadísticas -->
   <section id="sectionEstadisticas">
     <h2>Estadísticas</h2>
     <div class="stats-container">
@@ -331,7 +379,7 @@
     </div>
   </section>
   
-  <!-- Sección de Noticias (con "COMING SOON") -->
+  <!-- Sección de Noticias (COMING SOON) -->
   <section id="sectionNoticias">
     <h2>Noticias</h2>
     <ul>
@@ -348,17 +396,31 @@
         <div class="card-header">DRINK TEAM</div>
         <div class="card-body">
           <div class="lineup">
-            <div class="position portero"><a href="profile.html?name=Fran" target="_blank">Fran</a></div>
+            <div class="position portero">
+              <a href="#" class="player-link" data-player="Fran">Fran</a>
+            </div>
             <div class="defense">
-              <div class="position"><a href="profile.html?name=Raul" target="_blank">Raul</a></div>
-              <div class="position"><a href="profile.html?name=Juan" target="_blank">Juan</a></div>
-              <div class="position"><a href="profile.html?name=Alvaro" target="_blank">Alvaro</a></div>
+              <div class="position">
+                <a href="#" class="player-link" data-player="Raul">Raul</a>
+              </div>
+              <div class="position">
+                <a href="#" class="player-link" data-player="Juan">Juan</a>
+              </div>
+              <div class="position">
+                <a href="#" class="player-link" data-player="Alvaro">Alvaro</a>
+              </div>
             </div>
             <div class="midfield">
-              <div class="position"><a href="profile.html?name=Lay" target="_blank">Lay</a></div>
-              <div class="position"><a href="profile.html?name=Kuki" target="_blank">Kuki</a></div>
+              <div class="position">
+                <a href="#" class="player-link" data-player="Lay">Lay</a>
+              </div>
+              <div class="position">
+                <a href="#" class="player-link" data-player="Kuki">Kuki</a>
+              </div>
             </div>
-            <div class="position delantero"><a href="profile.html?name=Nacho" target="_blank">Nacho</a></div>
+            <div class="position delantero">
+              <a href="#" class="player-link" data-player="Nacho">Nacho</a>
+            </div>
           </div>
         </div>
       </div>
@@ -367,17 +429,31 @@
         <div class="card-header">CEPILLA FC</div>
         <div class="card-body">
           <div class="lineup">
-            <div class="position portero"><a href="profile.html?name=Sami" target="_blank">Sami</a></div>
+            <div class="position portero">
+              <a href="#" class="player-link" data-player="Sami">Sami</a>
+            </div>
             <div class="defense">
-              <div class="position"><a href="profile.html?name=Marko" target="_blank">Marko</a></div>
-              <div class="position"><a href="profile.html?name=HDG" target="_blank">HDG</a></div>
-              <div class="position"><a href="profile.html?name=Mariankas" target="_blank">Mariankas</a></div>
+              <div class="position">
+                <a href="#" class="player-link" data-player="Marko">Marko</a>
+              </div>
+              <div class="position">
+                <a href="#" class="player-link" data-player="HDG">HDG</a>
+              </div>
+              <div class="position">
+                <a href="#" class="player-link" data-player="Mariankas">Mariankas</a>
+              </div>
             </div>
             <div class="midfield">
-              <div class="position"><a href="profile.html?name=Juan%20L" target="_blank">Juan L</a></div>
-              <div class="position"><a href="profile.html?name=Nestor" target="_blank">Nestor</a></div>
+              <div class="position">
+                <a href="#" class="player-link" data-player="Juan L">Juan L</a>
+              </div>
+              <div class="position">
+                <a href="#" class="player-link" data-player="Nestor">Nestor</a>
+              </div>
             </div>
-            <div class="position delantero"><a href="profile.html?name=Curro" target="_blank">Curro</a></div>
+            <div class="position delantero">
+              <a href="#" class="player-link" data-player="Curro">Curro</a>
+            </div>
           </div>
         </div>
       </div>
@@ -386,17 +462,31 @@
         <div class="card-header">RECREATIVO DE JUERGA</div>
         <div class="card-body">
           <div class="lineup">
-            <div class="position portero"><a href="profile.html?name=Antonio" target="_blank">Antonio</a></div>
+            <div class="position portero">
+              <a href="#" class="player-link" data-player="Antonio">Antonio</a>
+            </div>
             <div class="defense">
-              <div class="position"><a href="profile.html?name=Viktor" target="_blank">Viktor</a></div>
-              <div class="position"><a href="profile.html?name=Leo" target="_blank">Leo</a></div>
-              <div class="position"><a href="profile.html?name=Robles" target="_blank">Robles</a></div>
+              <div class="position">
+                <a href="#" class="player-link" data-player="Viktor">Viktor</a>
+              </div>
+              <div class="position">
+                <a href="#" class="player-link" data-player="Leo">Leo</a>
+              </div>
+              <div class="position">
+                <a href="#" class="player-link" data-player="Robles">Robles</a>
+              </div>
             </div>
             <div class="midfield">
-              <div class="position"><a href="profile.html?name=Victor" target="_blank">Victor</a></div>
-              <div class="position"><a href="profile.html?name=Juanma" target="_blank">Juanma</a></div>
+              <div class="position">
+                <a href="#" class="player-link" data-player="Victor">Victor</a>
+              </div>
+              <div class="position">
+                <a href="#" class="player-link" data-player="Juanma">Juanma</a>
+              </div>
             </div>
-            <div class="position delantero"><a href="profile.html?name=Alex%20F." target="_blank">Alex F.</a></div>
+            <div class="position delantero">
+              <a href="#" class="player-link" data-player="Alex F.">Alex F.</a>
+            </div>
           </div>
         </div>
       </div>
@@ -405,45 +495,69 @@
         <div class="card-header">BORUSSIA DONUTS</div>
         <div class="card-body">
           <div class="lineup">
-            <div class="position portero"><a href="profile.html?name=Adri" target="_blank">Adri</a></div>
+            <div class="position portero">
+              <a href="#" class="player-link" data-player="Adri">Adri</a>
+            </div>
             <div class="defense">
-              <div class="position"><a href="profile.html?name=Niko" target="_blank">Niko</a></div>
-              <div class="position"><a href="profile.html?name=Carlos" target="_blank">Carlos</a></div>
-              <div class="position"><a href="profile.html?name=Alcaina" target="_blank">Alcaina</a></div>
+              <div class="position">
+                <a href="#" class="player-link" data-player="Niko">Niko</a>
+              </div>
+              <div class="position">
+                <a href="#" class="player-link" data-player="Carlos">Carlos</a>
+              </div>
+              <div class="position">
+                <a href="#" class="player-link" data-player="Alcaina">Alcaina</a>
+              </div>
             </div>
             <div class="midfield">
-              <div class="position"><a href="profile.html?name=Esteban" target="_blank">Esteban</a></div>
-              <div class="position"><a href="profile.html?name=Alvaro" target="_blank">Alvaro</a></div>
+              <div class="position">
+                <a href="#" class="player-link" data-player="Esteban">Esteban</a>
+              </div>
+              <div class="position">
+                <a href="#" class="player-link" data-player="Alvaro">Alvaro</a>
+              </div>
             </div>
-            <div class="position delantero"><a href="profile.html?name=Fer" target="_blank">Fer</a></div>
+            <div class="position delantero">
+              <a href="#" class="player-link" data-player="Fer">Fer</a>
+            </div>
           </div>
         </div>
       </div>
     </div>
   </section>
   
-  <!-- JavaScript para generar datos fijos (0) en Estadísticas -->
+  <!-- Modal para mostrar el perfil del jugador -->
+  <div id="profileModal" class="modal">
+    <div class="modal-content">
+      <span class="modal-close">&times;</span>
+      <img id="modalImg" src="https://via.placeholder.com/200" alt="Foto del Jugador">
+      <h1 id="modalName">Jugador</h1>
+      <p><strong>Datos:</strong> Aquí se mostrarán los datos del jugador.</p>
+      <p><strong>Descripción:</strong> Breve descripción del jugador...</p>
+    </div>
+  </div>
+  
+  <!-- JavaScript -->
   <script>
-    // Arrays de jugadores para estadísticas.
+    // Función para generar las listas de estadísticas (con links para perfiles)
     const playersStats = [
-      { name: "Viktor", color: "#FFD700" },    // Recreativo (amarillo)
-      { name: "Juan L", color: "#808080" },      // Cepilla (gris)
-      { name: "Raul", color: "#800080" },         // Drink (morado)
-      { name: "Curro", color: "#808080" },        // Cepilla (gris)
-      { name: "Fer", color: "#00CCCC" }           // Borussia (celeste)
+      { name: "Viktor", color: "#FFD700" },
+      { name: "Juan L", color: "#808080" },
+      { name: "Raul", color: "#800080" },
+      { name: "Curro", color: "#808080" },
+      { name: "Fer", color: "#00CCCC" }
     ];
     const porteros = [
-      { name: "Fran", color: "#800080" },        // Drink
-      { name: "Sami", color: "#808080" },          // Cepilla
-      { name: "Antonio", color: "#FFD700" },       // Recreativo
-      { name: "Adri", color: "#00CCCC" }           // Borussia
+      { name: "Fran", color: "#800080" },
+      { name: "Sami", color: "#808080" },
+      { name: "Antonio", color: "#FFD700" },
+      { name: "Adri", color: "#00CCCC" }
     ];
     
     function generateStats(listEl, players) {
       listEl.innerHTML = "";
       players.forEach(player => {
-        // Cada nombre se convierte en enlace al perfil (abre en nueva pestaña)
-        listEl.innerHTML += `<li><span style="background-color: ${player.color};"></span> <a href="profile.html?name=${encodeURIComponent(player.name)}" target="_blank">${player.name}</a>: 0</li>`;
+        listEl.innerHTML += `<li><span style="background-color: ${player.color};"></span> <a href="#" class="player-link" data-player="${encodeURIComponent(player.name)}">${player.name}</a>: 0</li>`;
       });
     }
     
@@ -455,7 +569,7 @@
       generateStats(document.getElementById("ulGolesRecibidos"), porteros);
     });
     
-    // Alternar visibilidad de secciones
+    // Alternar visibilidad de las secciones
     const btnClasificacion = document.getElementById("btnClasificacion");
     const btnEstadisticas = document.getElementById("btnEstadisticas");
     const btnNoticias = document.getElementById("btnNoticias");
@@ -523,11 +637,10 @@
       }
     });
     
-    // Lógica para los cards colapsables de Equipos
+    // Lógica para los cards colapsables en la sección de Equipos
     document.querySelectorAll('.team-card .card-header').forEach(header => {
       header.addEventListener('click', () => {
         const currentCard = header.parentElement;
-        // Cerrar todos los demás cards
         document.querySelectorAll('.team-card').forEach(card => {
           if (card !== currentCard) {
             card.classList.remove('active');
@@ -535,6 +648,41 @@
         });
         currentCard.classList.toggle('active');
       });
+    });
+    
+    // Modal para perfiles de jugadores
+    const modal = document.getElementById("profileModal");
+    const modalName = document.getElementById("modalName");
+    const modalImg = document.getElementById("modalImg");
+    const modalClose = document.querySelector(".modal-close");
+    
+    // Función para abrir el modal con datos del jugador (en este ejemplo, solo se muestra el nombre)
+    function openProfile(playerName) {
+      modalName.textContent = decodeURIComponent(playerName);
+      // Puedes modificar la URL de la imagen o cargarla dinámicamente según el jugador.
+      modalImg.src = "https://via.placeholder.com/200";
+      modal.style.display = "flex";
+    }
+    
+    // Agregar evento a todos los links de jugador
+    document.querySelectorAll(".player-link").forEach(link => {
+      link.addEventListener("click", (e) => {
+        e.preventDefault();
+        const player = e.target.getAttribute("data-player");
+        openProfile(player);
+      });
+    });
+    
+    // Cerrar el modal cuando se haga clic en la "X"
+    modalClose.addEventListener("click", () => {
+      modal.style.display = "none";
+    });
+    
+    // Cerrar el modal si se hace clic fuera del contenido
+    window.addEventListener("click", (event) => {
+      if (event.target == modal) {
+        modal.style.display = "none";
+      }
     });
   </script>
   
@@ -544,5 +692,68 @@
       <img src="https://1000logos.net/wp-content/uploads/2017/02/New-Instagram-logo.jpg" alt="Instagram Logo">
     </a>
   </div>
+  
+  <!-- Modal para Perfil de Jugador -->
+  <div id="profileModal" class="modal">
+    <div class="modal-content">
+      <span class="modal-close">&times;</span>
+      <img id="modalImg" src="https://via.placeholder.com/200" alt="Foto del Jugador">
+      <h1 id="modalName">Jugador</h1>
+      <p><strong>Datos:</strong> Aquí se mostrarán los datos del jugador.</p>
+      <p><strong>Descripción:</strong> Breve descripción del jugador...</p>
+    </div>
+  </div>
+  
+  <!-- Estilos para Modal -->
+  <style>
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 10000;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      overflow: auto;
+      background-color: rgba(0,0,0,0.5);
+      align-items: center;
+      justify-content: center;
+    }
+    .modal-content {
+      background-color: #fff;
+      margin: auto;
+      border-radius: 8px;
+      padding: 20px;
+      width: 90%;
+      max-width: 400px;
+      box-shadow: 0 2px 4px rgba(74,44,42,0.2);
+      position: relative;
+    }
+    .modal-close {
+      position: absolute;
+      right: 10px;
+      top: 10px;
+      font-size: 24px;
+      font-weight: bold;
+      cursor: pointer;
+      color: #4A2C2A;
+    }
+    .modal-content img {
+      width: 100%;
+      max-width: 200px;
+      border-radius: 50%;
+      display: block;
+      margin: 0 auto 20px;
+    }
+    .modal-content h1 {
+      text-align: center;
+      margin-bottom: 10px;
+    }
+    .modal-content p {
+      text-align: center;
+      margin: 10px 0;
+    }
+  </style>
+  
 </body>
 </html>
