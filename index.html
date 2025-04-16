@@ -17,7 +17,7 @@
       color: #4A2C2A;
     }
     
-    /* Bloque de logo superior derecho (opcional) */
+    /* Logo superior derecho (Instagram) */
     .top-right-logo {
       position: fixed;
       top: 10px;
@@ -33,7 +33,7 @@
       cursor: pointer;
     }
     
-    /* Cabecera: Título e imagen del árbol */
+    /* Cabecera: Título e imagen */
     header {
       display: flex;
       align-items: center;
@@ -80,7 +80,7 @@
       max-height: 0;
       overflow: hidden;
       opacity: 0;
-      background-color: #F2D7D9; /* Tonos rosáceo-burdeos */
+      background-color: #F2D7D9;
       padding: 0 20px;
       margin-bottom: 20px;
       border-radius: 5px;
@@ -115,6 +115,15 @@
       background-color: #4A2C2A;
       color: #fff;
     }
+    /* Cambiamos GM y GR por GF y GC */
+    #sectionClasificacion th:nth-child(6) {
+      content: "GF";
+    }
+    #sectionClasificacion th:nth-child(7) {
+      content: "GC";
+    }
+    /* Mejor: cambiar directamente la cabecera en el HTML (ver más abajo) */
+    
     .team-name {
       display: flex;
       align-items: center;
@@ -209,7 +218,6 @@
       color: #fff;
       cursor: pointer;
     }
-    /* Colores para cada equipo */
     .team-card.drink-team .card-header { background-color: #800080; }
     .team-card.cepilla .card-header { background-color: #808080; }
     .team-card.recreativo .card-header { background-color: #FFD700; color: #4A2C2A; }
@@ -245,15 +253,25 @@
     
     /* Media Queries para móviles */
     @media (max-width: 600px) {
-      header h1 { font-size: 2em; }
-      .nav-container button { font-size: 14px; padding: 10px 20px; }
-      #sectionClasificacion table { font-size: 14px; }
-      #sectionEquipos .teams-container,
-      #sectionEquipos .team-cards { 
-        /* En móviles, mostramos los cards en una sola columna */
+      header h1 { 
+        font-size: 2em; 
+      }
+      .nav-container button { 
+        font-size: 14px; 
+        padding: 10px 20px; 
+      }
+      #sectionClasificacion table {
+        font-size: 13px;
+        padding: 0;
+      }
+      /* Reorganiza la tabla de clasificación, si es necesario, para que se vea más compacta */
+      #sectionEquipos .team-cards {
         flex-direction: column;
       }
-      .stat-card { padding: 10px; font-size: 16px; }
+      .stat-card {
+        padding: 10px;
+        font-size: 16px;
+      }
     }
   </style>
   <link rel="manifest" href="manifest.json">
@@ -283,8 +301,8 @@
           <th>PG</th>
           <th>PE</th>
           <th>PP</th>
-          <th>GM</th>
-          <th>GR</th>
+          <th>GF</th>  <!-- Cambiado de GM -->
+          <th>GC</th>  <!-- Cambiado de GR -->
           <th>PTS</th>
         </tr>
       </thead>
@@ -346,7 +364,7 @@
     </ul>
   </section>
   
-  <!-- Sección de Equipos: Tarjetas colapsables -->
+  <!-- Sección de Equipos: Tarjetas Colapsables -->
   <section id="sectionEquipos">
     <h2>Equipos</h2>
     <div class="team-cards">
@@ -429,15 +447,15 @@
     </div>
   </section>
   
-  <!-- JavaScript para generar datos fijos (0) en estadísticas -->
+  <!-- JavaScript para generar datos fijos (0) en Estadísticas -->
   <script>
-    // Arrays de jugadores para estadísticas, con colores asignados.
+    // Arrays de jugadores para estadísticas, con colores asignados según equipo.
     const playersStats = [
-      { name: "Viktor", color: "#FFD700" },    // Recreativo: amarillo
-      { name: "Juan L", color: "#808080" },      // Cepilla: gris
-      { name: "Raul", color: "#800080" },         // Drink: morado
-      { name: "Curro", color: "#808080" },        // Cepilla: gris
-      { name: "Fer", color: "#00CCCC" }           // Borussia: celeste
+      { name: "Viktor", color: "#FFD700" },    // Recreativo
+      { name: "Juan L", color: "#808080" },      // Cepilla
+      { name: "Raul", color: "#800080" },         // Drink
+      { name: "Curro", color: "#808080" },        // Cepilla
+      { name: "Fer", color: "#00CCCC" }           // Borussia
     ];
     // Porteros para Goles Recibidos.
     const porteros = [
@@ -467,7 +485,7 @@
       generateStats(document.getElementById("ulGolesRecibidos"), porteros);
     });
     
-    // Alternar visibilidad de secciones (similares a los otros apartados)
+    // Alternar visibilidad de secciones
     const btnClasificacion = document.getElementById("btnClasificacion");
     const btnEstadisticas = document.getElementById("btnEstadisticas");
     const btnNoticias = document.getElementById("btnNoticias");
@@ -535,17 +553,17 @@
       }
     });
     
-    // Lógica para los cards de Equipos: Collapsible team cards
+    // Lógica para los cards colapsables en la sección de Equipos
     document.querySelectorAll('.team-card .card-header').forEach(header => {
       header.addEventListener('click', () => {
         const currentCard = header.parentElement;
-        // Cerrar los demás team cards
+        // Cerrar todos los demás
         document.querySelectorAll('.team-card').forEach(card => {
-          if(card !== currentCard) {
+          if (card !== currentCard) {
             card.classList.remove('active');
           }
         });
-        // Alternar el estado del team card actual
+        // Alternar el estado del card actual
         currentCard.classList.toggle('active');
       });
     });
