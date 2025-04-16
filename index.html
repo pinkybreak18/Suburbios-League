@@ -81,7 +81,7 @@
       max-height: 0;
       overflow: hidden;
       opacity: 0;
-      background-color: #F2D7D9; /* Tonos rosáceo-burdeos */
+      background-color: #F2D7D9;
       padding: 0 20px;
       margin-bottom: 20px;
       border-radius: 5px;
@@ -100,7 +100,7 @@
       margin-bottom: 15px;
     }
     
-    /* Sección de Clasificación: Tabla Compacta */
+    /* Sección de Clasificación: Tabla Compacta (sin PG, PE, PP) */
     #sectionClasificacion table {
       width: 100%;
       border-collapse: collapse;
@@ -117,9 +117,7 @@
       background-color: #4A2C2A;
       color: #fff;
     }
-    /* Actualización de encabezados: eliminamos PG, PE, PP y dejamos:
-       Equipo, PJ, GF, GC y PTS  */
-    /* Nota: Actualizamos directamente en el HTML, ver siguiente bloque */
+    /* Encabezado: Equipo, PJ, GF, GC y PTS */
     .team-name {
       display: flex;
       align-items: center;
@@ -136,7 +134,7 @@
     .cepilla .color-indicator { background-color: #808080; }
     .borussia .color-indicator { background-color: #00FFFF; }
     
-    /* Sección de Estadísticas: Tarjetas */
+    /* Sección de Estadísticas: Tarjetas con enlaces en nombres */
     .stats-container {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
@@ -179,24 +177,24 @@
       border-radius: 50%;
     }
     
-    /* Sección de Noticias: Lista */
+    /* Sección de Noticias: Mostrar "COMING SOON" con una fuente interesante */
     #sectionNoticias ul {
       padding: 0;
       list-style: none;
       display: flex;
-      flex-direction: column;
-      gap: 10px;
-    }
-    #sectionNoticias ul li {
-      padding: 10px;
-      background-color: #fff;
-      border-left: 5px solid #E6B0AA;
-      border-radius: 4px;
-      font-size: 18px;
+      justify-content: center;
+      align-items: center;
+      height: 100px;
+      font-size: 2em;
+      font-weight: 700;
+      font-family: 'Courier New', Courier, monospace;
       color: #4A2C2A;
     }
+    #sectionNoticias ul li {
+      margin: 0;
+    }
     
-    /* Sección de Equipos: Tarjetas Colapsables */
+    /* Sección de Equipos: Tarjetas colapsables */
     #sectionEquipos .team-cards {
       display: flex;
       flex-direction: column;
@@ -252,7 +250,6 @@
       header h1 { font-size: 2em; }
       .nav-container button { font-size: 14px; padding: 10px 20px; }
       #sectionClasificacion table { font-size: 13px; }
-      /* En móviles, mostramos los cards de equipos en una sola columna */
       #sectionEquipos .team-cards { flex-direction: column; }
       .stat-card { padding: 10px; font-size: 16px; }
     }
@@ -273,7 +270,7 @@
     <button id="btnEquipos">Equipos</button>
   </div>
   
-  <!-- Sección de Clasificación (con columnas: Equipo, PJ, GF, GC, PTS) -->
+  <!-- Sección de Clasificación (Simplificada) -->
   <section id="sectionClasificacion">
     <h2>Clasificación</h2>
     <table>
@@ -307,7 +304,7 @@
     </table>
   </section>
   
-  <!-- Sección de Estadísticas -->
+  <!-- Sección de Estadísticas (Nombres con enlaces a perfil) -->
   <section id="sectionEstadisticas">
     <h2>Estadísticas</h2>
     <div class="stats-container">
@@ -334,13 +331,11 @@
     </div>
   </section>
   
-  <!-- Sección de Noticias -->
+  <!-- Sección de Noticias (con "COMING SOON") -->
   <section id="sectionNoticias">
     <h2>Noticias</h2>
     <ul>
-      <li>Noticia 1: Resumen de la jornada.</li>
-      <li>Noticia 2: Rumores sobre el próximo partido.</li>
-      <li>Noticia 3: Entrevista a un jugador destacado.</li>
+      <li>COMING SOON</li>
     </ul>
   </section>
   
@@ -353,17 +348,17 @@
         <div class="card-header">DRINK TEAM</div>
         <div class="card-body">
           <div class="lineup">
-            <div class="position portero">Fran</div>
+            <div class="position portero"><a href="profile.html?name=Fran" target="_blank">Fran</a></div>
             <div class="defense">
-              <div class="position">Raul</div>
-              <div class="position">Juan</div>
-              <div class="position">Alvaro</div>
+              <div class="position"><a href="profile.html?name=Raul" target="_blank">Raul</a></div>
+              <div class="position"><a href="profile.html?name=Juan" target="_blank">Juan</a></div>
+              <div class="position"><a href="profile.html?name=Alvaro" target="_blank">Alvaro</a></div>
             </div>
             <div class="midfield">
-              <div class="position">Lay</div>
-              <div class="position">Kuki</div>
+              <div class="position"><a href="profile.html?name=Lay" target="_blank">Lay</a></div>
+              <div class="position"><a href="profile.html?name=Kuki" target="_blank">Kuki</a></div>
             </div>
-            <div class="position delantero">Nacho</div>
+            <div class="position delantero"><a href="profile.html?name=Nacho" target="_blank">Nacho</a></div>
           </div>
         </div>
       </div>
@@ -372,17 +367,17 @@
         <div class="card-header">CEPILLA FC</div>
         <div class="card-body">
           <div class="lineup">
-            <div class="position portero">Sami</div>
+            <div class="position portero"><a href="profile.html?name=Sami" target="_blank">Sami</a></div>
             <div class="defense">
-              <div class="position">Marko</div>
-              <div class="position">HDG</div>
-              <div class="position">Mariankas</div>
+              <div class="position"><a href="profile.html?name=Marko" target="_blank">Marko</a></div>
+              <div class="position"><a href="profile.html?name=HDG" target="_blank">HDG</a></div>
+              <div class="position"><a href="profile.html?name=Mariankas" target="_blank">Mariankas</a></div>
             </div>
             <div class="midfield">
-              <div class="position">Juan L</div>
-              <div class="position">Nestor</div>
+              <div class="position"><a href="profile.html?name=Juan%20L" target="_blank">Juan L</a></div>
+              <div class="position"><a href="profile.html?name=Nestor" target="_blank">Nestor</a></div>
             </div>
-            <div class="position delantero">Curro</div>
+            <div class="position delantero"><a href="profile.html?name=Curro" target="_blank">Curro</a></div>
           </div>
         </div>
       </div>
@@ -391,17 +386,17 @@
         <div class="card-header">RECREATIVO DE JUERGA</div>
         <div class="card-body">
           <div class="lineup">
-            <div class="position portero">Antonio</div>
+            <div class="position portero"><a href="profile.html?name=Antonio" target="_blank">Antonio</a></div>
             <div class="defense">
-              <div class="position">Viktor</div>
-              <div class="position">Leo</div>
-              <div class="position">Robles</div>
+              <div class="position"><a href="profile.html?name=Viktor" target="_blank">Viktor</a></div>
+              <div class="position"><a href="profile.html?name=Leo" target="_blank">Leo</a></div>
+              <div class="position"><a href="profile.html?name=Robles" target="_blank">Robles</a></div>
             </div>
             <div class="midfield">
-              <div class="position">Victor</div>
-              <div class="position">Juanma</div>
+              <div class="position"><a href="profile.html?name=Victor" target="_blank">Victor</a></div>
+              <div class="position"><a href="profile.html?name=Juanma" target="_blank">Juanma</a></div>
             </div>
-            <div class="position delantero">Alex F.</div>
+            <div class="position delantero"><a href="profile.html?name=Alex%20F." target="_blank">Alex F.</a></div>
           </div>
         </div>
       </div>
@@ -410,17 +405,17 @@
         <div class="card-header">BORUSSIA DONUTS</div>
         <div class="card-body">
           <div class="lineup">
-            <div class="position portero">Adri</div>
+            <div class="position portero"><a href="profile.html?name=Adri" target="_blank">Adri</a></div>
             <div class="defense">
-              <div class="position">Niko</div>
-              <div class="position">Carlos</div>
-              <div class="position">Alcaina</div>
+              <div class="position"><a href="profile.html?name=Niko" target="_blank">Niko</a></div>
+              <div class="position"><a href="profile.html?name=Carlos" target="_blank">Carlos</a></div>
+              <div class="position"><a href="profile.html?name=Alcaina" target="_blank">Alcaina</a></div>
             </div>
             <div class="midfield">
-              <div class="position">Esteban</div>
-              <div class="position">Alvaro</div>
+              <div class="position"><a href="profile.html?name=Esteban" target="_blank">Esteban</a></div>
+              <div class="position"><a href="profile.html?name=Alvaro" target="_blank">Alvaro</a></div>
             </div>
-            <div class="position delantero">Fer</div>
+            <div class="position delantero"><a href="profile.html?name=Fer" target="_blank">Fer</a></div>
           </div>
         </div>
       </div>
@@ -447,12 +442,8 @@
     function generateStats(listEl, players) {
       listEl.innerHTML = "";
       players.forEach(player => {
-        const li = document.createElement("li");
-        const span = document.createElement("span");
-        span.style.backgroundColor = player.color;
-        li.appendChild(span);
-        li.appendChild(document.createTextNode(`${player.name}: 0`));
-        listEl.appendChild(li);
+        // Cada nombre se convierte en enlace al perfil (abre en nueva pestaña)
+        listEl.innerHTML += `<li><span style="background-color: ${player.color};"></span> <a href="profile.html?name=${encodeURIComponent(player.name)}" target="_blank">${player.name}</a>: 0</li>`;
       });
     }
     
@@ -532,17 +523,16 @@
       }
     });
     
-    // Lógica para tarjetas colapsables en la sección Equipos
+    // Lógica para los cards colapsables de Equipos
     document.querySelectorAll('.team-card .card-header').forEach(header => {
       header.addEventListener('click', () => {
         const currentCard = header.parentElement;
-        // Cerrar los demás team cards
+        // Cerrar todos los demás cards
         document.querySelectorAll('.team-card').forEach(card => {
           if (card !== currentCard) {
             card.classList.remove('active');
           }
         });
-        // Alternar el estado del team card actual
         currentCard.classList.toggle('active');
       });
     });
