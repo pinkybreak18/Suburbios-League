@@ -39,6 +39,7 @@
       align-items: center;
       gap: 15px;
       margin-bottom: 20px;
+      justify-content: space-between;
     }
     header h1 {
       margin: 0;
@@ -80,7 +81,7 @@
       max-height: 0;
       overflow: hidden;
       opacity: 0;
-      background-color: #F2D7D9;
+      background-color: #F2D7D9; /* Tonos rosáceo-burdeos */
       padding: 0 20px;
       margin-bottom: 20px;
       border-radius: 5px;
@@ -99,15 +100,16 @@
       margin-bottom: 15px;
     }
     
-    /* Sección de Clasificación: Tabla */
+    /* Sección de Clasificación: Tabla Compacta */
     #sectionClasificacion table {
       width: 100%;
       border-collapse: collapse;
       background-color: #fff;
+      font-size: 14px;
     }
     #sectionClasificacion th,
     #sectionClasificacion td {
-      padding: 8px;
+      padding: 6px;
       text-align: center;
       border: 1px solid #ddd;
     }
@@ -115,15 +117,9 @@
       background-color: #4A2C2A;
       color: #fff;
     }
-    /* Cambiamos GM y GR por GF y GC */
-    #sectionClasificacion th:nth-child(6) {
-      content: "GF";
-    }
-    #sectionClasificacion th:nth-child(7) {
-      content: "GC";
-    }
-    /* Mejor: cambiar directamente la cabecera en el HTML (ver más abajo) */
-    
+    /* Actualización de encabezados: eliminamos PG, PE, PP y dejamos:
+       Equipo, PJ, GF, GC y PTS  */
+    /* Nota: Actualizamos directamente en el HTML, ver siguiente bloque */
     .team-name {
       display: flex;
       align-items: center;
@@ -200,7 +196,7 @@
       color: #4A2C2A;
     }
     
-    /* Sección de Equipos: Tarjetas colapsables */
+    /* Sección de Equipos: Tarjetas Colapsables */
     #sectionEquipos .team-cards {
       display: flex;
       flex-direction: column;
@@ -253,25 +249,12 @@
     
     /* Media Queries para móviles */
     @media (max-width: 600px) {
-      header h1 { 
-        font-size: 2em; 
-      }
-      .nav-container button { 
-        font-size: 14px; 
-        padding: 10px 20px; 
-      }
-      #sectionClasificacion table {
-        font-size: 13px;
-        padding: 0;
-      }
-      /* Reorganiza la tabla de clasificación, si es necesario, para que se vea más compacta */
-      #sectionEquipos .team-cards {
-        flex-direction: column;
-      }
-      .stat-card {
-        padding: 10px;
-        font-size: 16px;
-      }
+      header h1 { font-size: 2em; }
+      .nav-container button { font-size: 14px; padding: 10px 20px; }
+      #sectionClasificacion table { font-size: 13px; }
+      /* En móviles, mostramos los cards de equipos en una sola columna */
+      #sectionEquipos .team-cards { flex-direction: column; }
+      .stat-card { padding: 10px; font-size: 16px; }
     }
   </style>
   <link rel="manifest" href="manifest.json">
@@ -290,7 +273,7 @@
     <button id="btnEquipos">Equipos</button>
   </div>
   
-  <!-- Sección de Clasificación -->
+  <!-- Sección de Clasificación (con columnas: Equipo, PJ, GF, GC, PTS) -->
   <section id="sectionClasificacion">
     <h2>Clasificación</h2>
     <table>
@@ -298,30 +281,27 @@
         <tr>
           <th>Equipo</th>
           <th>PJ</th>
-          <th>PG</th>
-          <th>PE</th>
-          <th>PP</th>
-          <th>GF</th>  <!-- Cambiado de GM -->
-          <th>GC</th>  <!-- Cambiado de GR -->
+          <th>GF</th>
+          <th>GC</th>
           <th>PTS</th>
         </tr>
       </thead>
       <tbody>
         <tr class="drink-team">
           <td class="team-name"><span class="color-indicator"></span>DRINK TEAM</td>
-          <td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td>
+          <td>0</td><td>0</td><td>0</td><td>0</td>
         </tr>
         <tr class="cepilla">
           <td class="team-name"><span class="color-indicator"></span>CEPILLA FC</td>
-          <td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td>
+          <td>0</td><td>0</td><td>0</td><td>0</td>
         </tr>
         <tr class="recreativo">
           <td class="team-name"><span class="color-indicator"></span>RECREATIVO DE JUERGA</td>
-          <td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td>
+          <td>0</td><td>0</td><td>0</td><td>0</td>
         </tr>
         <tr class="borussia">
           <td class="team-name"><span class="color-indicator"></span>BORUSSIA DONUTS</td>
-          <td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td>
+          <td>0</td><td>0</td><td>0</td><td>0</td>
         </tr>
       </tbody>
     </table>
@@ -364,7 +344,7 @@
     </ul>
   </section>
   
-  <!-- Sección de Equipos: Tarjetas Colapsables -->
+  <!-- Sección de Equipos: Cards Colapsables -->
   <section id="sectionEquipos">
     <h2>Equipos</h2>
     <div class="team-cards">
@@ -449,15 +429,14 @@
   
   <!-- JavaScript para generar datos fijos (0) en Estadísticas -->
   <script>
-    // Arrays de jugadores para estadísticas, con colores asignados según equipo.
+    // Arrays de jugadores para estadísticas.
     const playersStats = [
-      { name: "Viktor", color: "#FFD700" },    // Recreativo
-      { name: "Juan L", color: "#808080" },      // Cepilla
-      { name: "Raul", color: "#800080" },         // Drink
-      { name: "Curro", color: "#808080" },        // Cepilla
-      { name: "Fer", color: "#00CCCC" }           // Borussia
+      { name: "Viktor", color: "#FFD700" },    // Recreativo (amarillo)
+      { name: "Juan L", color: "#808080" },      // Cepilla (gris)
+      { name: "Raul", color: "#800080" },         // Drink (morado)
+      { name: "Curro", color: "#808080" },        // Cepilla (gris)
+      { name: "Fer", color: "#00CCCC" }           // Borussia (celeste)
     ];
-    // Porteros para Goles Recibidos.
     const porteros = [
       { name: "Fran", color: "#800080" },        // Drink
       { name: "Sami", color: "#808080" },          // Cepilla
@@ -553,17 +532,17 @@
       }
     });
     
-    // Lógica para los cards colapsables en la sección de Equipos
+    // Lógica para tarjetas colapsables en la sección Equipos
     document.querySelectorAll('.team-card .card-header').forEach(header => {
       header.addEventListener('click', () => {
         const currentCard = header.parentElement;
-        // Cerrar todos los demás
+        // Cerrar los demás team cards
         document.querySelectorAll('.team-card').forEach(card => {
           if (card !== currentCard) {
             card.classList.remove('active');
           }
         });
-        // Alternar el estado del card actual
+        // Alternar el estado del team card actual
         currentCard.classList.toggle('active');
       });
     });
