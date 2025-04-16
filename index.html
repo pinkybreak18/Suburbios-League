@@ -17,7 +17,7 @@
       color: #4A2C2A;
     }
     
-    /* Estilo para enlaces de jugador: mantiene el color y subraya al pasar el cursor */
+    /* Enlaces de jugador: mantiene el color y subraya al pasar el cursor */
     .player-link {
       color: inherit;
       text-decoration: none;
@@ -110,7 +110,7 @@
       margin-bottom: 15px;
     }
     
-    /* Sección de Clasificación: Tabla Compacta */
+    /* Sección de Clasificación: Tabla Compacta (Equipo, PJ, GF, GC, PTS) */
     #sectionClasificacion table {
       width: 100%;
       border-collapse: collapse;
@@ -127,7 +127,6 @@
       background-color: #4A2C2A;
       color: #fff;
     }
-    /* Encabezado: Equipo, PJ, GF, GC, PTS */
     .team-name {
       display: flex;
       align-items: center;
@@ -255,6 +254,15 @@
       min-width: 70px;
     }
     
+    /* Sección Comparar Jugadores (placeholder) */
+    #sectionComparar {
+      font-family: 'Courier New', Courier, monospace;
+      text-align: center;
+      padding: 20px;
+      font-size: 1.8em;
+      color: #4A2C2A;
+    }
+    
     /* Media Queries para móviles */
     @media (max-width: 600px) {
       header h1 { font-size: 2em; }
@@ -278,6 +286,7 @@
     <button id="btnEstadisticas">Estadísticas</button>
     <button id="btnNoticias">Noticias</button>
     <button id="btnEquipos">Equipos</button>
+    <button id="btnComparar">Comparar Jugadores</button>
   </div>
   
   <!-- Sección de Clasificación (Simplificada) -->
@@ -448,13 +457,19 @@
     </div>
   </section>
   
+  <!-- Sección Comparar Jugadores (Placeholder) -->
+  <section id="sectionComparar">
+    <h2>Comparar Jugadores</h2>
+    <p>COMING SOON</p>
+  </section>
+  
   <!-- Modal para Perfil de Jugador -->
   <div id="profileModal" class="modal">
     <div class="modal-content">
       <span class="modal-close">&times;</span>
       <img id="modalImg" src="https://via.placeholder.com/200" alt="Foto del Jugador">
       <h1 id="modalName">Jugador</h1>
-      <p><strong>Datos:</strong> Aquí se mostrarán los datos del jugador.</p>
+      <p id="modalData"><strong>Datos:</strong> Equipo – Posición – Color</p>
       <p><strong>Descripción:</strong> Breve descripción del jugador...</p>
     </div>
   </div>
@@ -462,7 +477,42 @@
   <!-- JavaScript -->
   <script>
     document.addEventListener("DOMContentLoaded", function() {
-      // Datos para las estadísticas
+      // Datos de perfiles de jugadores
+      const playerProfiles = {
+        "Fran": { team: "DRINK TEAM", position: "Portero", colorDetail: "Color representativo: #800080" },
+        "Raul": { team: "DRINK TEAM", position: "Defensa", colorDetail: "Color representativo: #800080" },
+        "Juan": { team: "DRINK TEAM", position: "Defensa", colorDetail: "Color representativo: #800080" },
+        "Alvaro": { team: "DRINK TEAM", position: "Defensa", colorDetail: "Color representativo: #800080" },
+        "Lay": { team: "DRINK TEAM", position: "Mediocampista", colorDetail: "Color representativo: #800080" },
+        "Kuki": { team: "DRINK TEAM", position: "Mediocampista", colorDetail: "Color representativo: #800080" },
+        "Nacho": { team: "DRINK TEAM", position: "Delantero", colorDetail: "Color representativo: #800080" },
+        
+        "Sami": { team: "CEPILLA FC", position: "Portero", colorDetail: "Color representativo: #808080" },
+        "Marko": { team: "CEPILLA FC", position: "Defensa", colorDetail: "Color representativo: #808080" },
+        "HDG": { team: "CEPILLA FC", position: "Defensa", colorDetail: "Color representativo: #808080" },
+        "Mariankas": { team: "CEPILLA FC", position: "Defensa", colorDetail: "Color representativo: #808080" },
+        "Juan L": { team: "CEPILLA FC", position: "Mediocampista", colorDetail: "Color representativo: #808080" },
+        "Nestor": { team: "CEPILLA FC", position: "Mediocampista", colorDetail: "Color representativo: #808080" },
+        "Curro": { team: "CEPILLA FC", position: "Delantero", colorDetail: "Color representativo: #808080" },
+        
+        "Antonio": { team: "RECREATIVO DE JUERGA", position: "Portero", colorDetail: "Color representativo: #FFD700" },
+        "Viktor": { team: "RECREATIVO DE JUERGA", position: "Defensa", colorDetail: "Color representativo: #FFD700" },
+        "Leo": { team: "RECREATIVO DE JUERGA", position: "Defensa", colorDetail: "Color representativo: #FFD700" },
+        "Robles": { team: "RECREATIVO DE JUERGA", position: "Defensa", colorDetail: "Color representativo: #FFD700" },
+        "Victor": { team: "RECREATIVO DE JUERGA", position: "Mediocampista", colorDetail: "Color representativo: #FFD700" },
+        "Juanma": { team: "RECREATIVO DE JUERGA", position: "Mediocampista", colorDetail: "Color representativo: #FFD700" },
+        "Alex F.": { team: "RECREATIVO DE JUERGA", position: "Delantero", colorDetail: "Color representativo: #FFD700" },
+        
+        "Adri": { team: "BORUSSIA DONUTS", position: "Portero", colorDetail: "Color representativo: #00CCCC" },
+        "Niko": { team: "BORUSSIA DONUTS", position: "Defensa", colorDetail: "Color representativo: #00CCCC" },
+        "Carlos": { team: "BORUSSIA DONUTS", position: "Defensa", colorDetail: "Color representativo: #00CCCC" },
+        "Alcaina": { team: "BORUSSIA DONUTS", position: "Defensa", colorDetail: "Color representativo: #00CCCC" },
+        "Esteban": { team: "BORUSSIA DONUTS", position: "Mediocampista", colorDetail: "Color representativo: #00CCCC" },
+        "Alvaro": { team: "BORUSSIA DONUTS", position: "Mediocampista", colorDetail: "Color representativo: #00CCCC" },
+        "Fer": { team: "BORUSSIA DONUTS", position: "Delantero", colorDetail: "Color representativo: #00CCCC" }
+      };
+
+      // Función para generar datos para la sección de Estadísticas
       const playersStats = [
         { name: "Viktor", color: "#FFD700" },
         { name: "Juan L", color: "#808080" },
@@ -495,14 +545,16 @@
       const btnEstadisticas = document.getElementById("btnEstadisticas");
       const btnNoticias = document.getElementById("btnNoticias");
       const btnEquipos = document.getElementById("btnEquipos");
+      const btnComparar = document.getElementById("btnComparar");
       
       const sectionClasificacion = document.getElementById("sectionClasificacion");
       const sectionEstadisticas = document.getElementById("sectionEstadisticas");
       const sectionNoticias = document.getElementById("sectionNoticias");
       const sectionEquipos = document.getElementById("sectionEquipos");
+      const sectionComparar = document.getElementById("sectionComparar");
       
-      const sections = [sectionClasificacion, sectionEstadisticas, sectionNoticias, sectionEquipos];
-      const buttons = [btnClasificacion, btnEstadisticas, btnNoticias, btnEquipos];
+      const sections = [sectionClasificacion, sectionEstadisticas, sectionNoticias, sectionEquipos, sectionComparar];
+      const buttons = [btnClasificacion, btnEstadisticas, btnNoticias, btnEquipos, btnComparar];
       
       function cerrarSecciones() {
         sections.forEach(sec => sec.classList.remove("visible"));
@@ -511,6 +563,7 @@
           if (btn === btnEstadisticas) btn.textContent = "Estadísticas";
           if (btn === btnNoticias) btn.textContent = "Noticias";
           if (btn === btnEquipos) btn.textContent = "Equipos";
+          if (btn === btnComparar) btn.textContent = "Comparar Jugadores";
         });
       }
       
@@ -558,9 +611,22 @@
         }
       });
       
-      // Lógica para los cards colapsables de Equipos
+      btnComparar.addEventListener("click", () => {
+        if (!sectionComparar.classList.contains("visible")) {
+          cerrarSecciones();
+          sectionComparar.classList.add("visible");
+          btnComparar.textContent = "Ocultar Comparar Jugadores";
+        } else {
+          sectionComparar.classList.remove("visible");
+          btnComparar.textContent = "Comparar Jugadores";
+        }
+      });
+      
+      // Tarjetas colapsables de Equipos
       document.querySelectorAll('.team-card .card-header').forEach(header => {
-        header.addEventListener('click', () => {
+        header.addEventListener('click', (e) => {
+          // Para evitar conflicto con la acción de modal, detén la propagación.
+          e.stopPropagation();
           const currentCard = header.parentElement;
           document.querySelectorAll('.team-card').forEach(card => {
             if (card !== currentCard) {
@@ -571,26 +637,35 @@
         });
       });
       
-      // Función para abrir el modal de perfil
+      // Modal para perfiles de jugadores
       const modal = document.getElementById("profileModal");
       const modalName = document.getElementById("modalName");
       const modalImg = document.getElementById("modalImg");
+      const modalData = document.getElementById("modalData");
       const modalClose = document.querySelector(".modal-close");
       
       function openProfile(playerName) {
-        modalName.textContent = decodeURIComponent(playerName);
+        playerName = decodeURIComponent(playerName);
+        modalName.textContent = playerName;
         modalImg.src = "https://via.placeholder.com/200";
+        // Buscar datos del jugador en playerProfiles
+        const profile = playerProfiles[playerName];
+        if (profile) {
+          modalData.innerHTML = `<strong>Datos:</strong> ${profile.team} – ${profile.position} – ${profile.colorDetail}`;
+        } else {
+          modalData.innerHTML = `<strong>Datos:</strong> No se han cargado datos.`;
+        }
         modal.style.display = "flex";
       }
       
-      // Asignar eventos a todos los player-link (esto se realiza aquí para asegurar que existan)
-      document.querySelectorAll(".player-link").forEach(link => {
-        link.addEventListener("click", function(e) {
+      // Delegación de eventos para abrir el modal de perfil
+      document.addEventListener("click", function(e) {
+        if (e.target && e.target.classList.contains("player-link")) {
           e.preventDefault();
-          e.stopPropagation(); // Evita que se active otro evento de click colapsable
-          const playerName = link.getAttribute("data-player");
+          e.stopPropagation();
+          const playerName = e.target.getAttribute("data-player");
           openProfile(playerName);
-        });
+        }
       });
       
       // Cerrar el modal
@@ -619,7 +694,7 @@
       <span class="modal-close">&times;</span>
       <img id="modalImg" src="https://via.placeholder.com/200" alt="Foto del Jugador">
       <h1 id="modalName">Jugador</h1>
-      <p><strong>Datos:</strong> Aquí se mostrarán los datos del jugador.</p>
+      <p id="modalData"><strong>Datos:</strong> Equipo – Posición – Color</p>
       <p><strong>Descripción:</strong> Breve descripción del jugador...</p>
     </div>
   </div>
