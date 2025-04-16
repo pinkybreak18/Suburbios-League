@@ -17,52 +17,14 @@
       color: #4A2C2A;
     }
     
-    /* Modal de perfil */
-    .modal {
-      display: none; /* Oculto por defecto */
-      position: fixed;
-      z-index: 10000;
-      left: 0;
-      top: 0;
-      width: 100%;
-      height: 100%;
-      overflow: auto;
-      background-color: rgba(0,0,0,0.5);
-      align-items: center;
-      justify-content: center;
-    }
-    .modal-content {
-      background-color: #fff;
-      margin: auto;
-      border-radius: 8px;
-      padding: 20px;
-      width: 90%;
-      max-width: 400px;
-      box-shadow: 0 2px 4px rgba(74,44,42,0.2);
-      position: relative;
-    }
-    .modal-close {
-      position: absolute;
-      right: 10px;
-      top: 10px;
-      font-size: 20px;
+    /* Estilo para enlaces de jugador: mantiene el color y subraya al pasar el cursor */
+    .player-link {
+      color: inherit;
+      text-decoration: none;
       cursor: pointer;
-      color: #4A2C2A;
     }
-    .modal-content img {
-      width: 100%;
-      max-width: 200px;
-      border-radius: 50%;
-      display: block;
-      margin: 0 auto 20px;
-    }
-    .modal-content h1 {
-      text-align: center;
-      margin-bottom: 10px;
-    }
-    .modal-content p {
-      text-align: center;
-      margin: 10px 0;
+    .player-link:hover {
+      text-decoration: underline;
     }
     
     /* Logo superior derecho (Instagram) */
@@ -182,7 +144,7 @@
     .cepilla .color-indicator { background-color: #808080; }
     .borussia .color-indicator { background-color: #00FFFF; }
     
-    /* Sección de Estadísticas: Tarjetas con enlaces en nombres */
+    /* Sección de Estadísticas */
     .stats-container {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
@@ -400,23 +362,13 @@
               <a href="#" class="player-link" data-player="Fran">Fran</a>
             </div>
             <div class="defense">
-              <div class="position">
-                <a href="#" class="player-link" data-player="Raul">Raul</a>
-              </div>
-              <div class="position">
-                <a href="#" class="player-link" data-player="Juan">Juan</a>
-              </div>
-              <div class="position">
-                <a href="#" class="player-link" data-player="Alvaro">Alvaro</a>
-              </div>
+              <div class="position"><a href="#" class="player-link" data-player="Raul">Raul</a></div>
+              <div class="position"><a href="#" class="player-link" data-player="Juan">Juan</a></div>
+              <div class="position"><a href="#" class="player-link" data-player="Alvaro">Alvaro</a></div>
             </div>
             <div class="midfield">
-              <div class="position">
-                <a href="#" class="player-link" data-player="Lay">Lay</a>
-              </div>
-              <div class="position">
-                <a href="#" class="player-link" data-player="Kuki">Kuki</a>
-              </div>
+              <div class="position"><a href="#" class="player-link" data-player="Lay">Lay</a></div>
+              <div class="position"><a href="#" class="player-link" data-player="Kuki">Kuki</a></div>
             </div>
             <div class="position delantero">
               <a href="#" class="player-link" data-player="Nacho">Nacho</a>
@@ -433,23 +385,13 @@
               <a href="#" class="player-link" data-player="Sami">Sami</a>
             </div>
             <div class="defense">
-              <div class="position">
-                <a href="#" class="player-link" data-player="Marko">Marko</a>
-              </div>
-              <div class="position">
-                <a href="#" class="player-link" data-player="HDG">HDG</a>
-              </div>
-              <div class="position">
-                <a href="#" class="player-link" data-player="Mariankas">Mariankas</a>
-              </div>
+              <div class="position"><a href="#" class="player-link" data-player="Marko">Marko</a></div>
+              <div class="position"><a href="#" class="player-link" data-player="HDG">HDG</a></div>
+              <div class="position"><a href="#" class="player-link" data-player="Mariankas">Mariankas</a></div>
             </div>
             <div class="midfield">
-              <div class="position">
-                <a href="#" class="player-link" data-player="Juan L">Juan L</a>
-              </div>
-              <div class="position">
-                <a href="#" class="player-link" data-player="Nestor">Nestor</a>
-              </div>
+              <div class="position"><a href="#" class="player-link" data-player="Juan L">Juan L</a></div>
+              <div class="position"><a href="#" class="player-link" data-player="Nestor">Nestor</a></div>
             </div>
             <div class="position delantero">
               <a href="#" class="player-link" data-player="Curro">Curro</a>
@@ -466,23 +408,13 @@
               <a href="#" class="player-link" data-player="Antonio">Antonio</a>
             </div>
             <div class="defense">
-              <div class="position">
-                <a href="#" class="player-link" data-player="Viktor">Viktor</a>
-              </div>
-              <div class="position">
-                <a href="#" class="player-link" data-player="Leo">Leo</a>
-              </div>
-              <div class="position">
-                <a href="#" class="player-link" data-player="Robles">Robles</a>
-              </div>
+              <div class="position"><a href="#" class="player-link" data-player="Viktor">Viktor</a></div>
+              <div class="position"><a href="#" class="player-link" data-player="Leo">Leo</a></div>
+              <div class="position"><a href="#" class="player-link" data-player="Robles">Robles</a></div>
             </div>
             <div class="midfield">
-              <div class="position">
-                <a href="#" class="player-link" data-player="Victor">Victor</a>
-              </div>
-              <div class="position">
-                <a href="#" class="player-link" data-player="Juanma">Juanma</a>
-              </div>
+              <div class="position"><a href="#" class="player-link" data-player="Victor">Victor</a></div>
+              <div class="position"><a href="#" class="player-link" data-player="Juanma">Juanma</a></div>
             </div>
             <div class="position delantero">
               <a href="#" class="player-link" data-player="Alex F.">Alex F.</a>
@@ -499,23 +431,13 @@
               <a href="#" class="player-link" data-player="Adri">Adri</a>
             </div>
             <div class="defense">
-              <div class="position">
-                <a href="#" class="player-link" data-player="Niko">Niko</a>
-              </div>
-              <div class="position">
-                <a href="#" class="player-link" data-player="Carlos">Carlos</a>
-              </div>
-              <div class="position">
-                <a href="#" class="player-link" data-player="Alcaina">Alcaina</a>
-              </div>
+              <div class="position"><a href="#" class="player-link" data-player="Niko">Niko</a></div>
+              <div class="position"><a href="#" class="player-link" data-player="Carlos">Carlos</a></div>
+              <div class="position"><a href="#" class="player-link" data-player="Alcaina">Alcaina</a></div>
             </div>
             <div class="midfield">
-              <div class="position">
-                <a href="#" class="player-link" data-player="Esteban">Esteban</a>
-              </div>
-              <div class="position">
-                <a href="#" class="player-link" data-player="Alvaro">Alvaro</a>
-              </div>
+              <div class="position"><a href="#" class="player-link" data-player="Esteban">Esteban</a></div>
+              <div class="position"><a href="#" class="player-link" data-player="Alvaro">Alvaro</a></div>
             </div>
             <div class="position delantero">
               <a href="#" class="player-link" data-player="Fer">Fer</a>
@@ -526,7 +448,7 @@
     </div>
   </section>
   
-  <!-- Modal para mostrar el perfil del jugador -->
+  <!-- Modal para Perfil de Jugador -->
   <div id="profileModal" class="modal">
     <div class="modal-content">
       <span class="modal-close">&times;</span>
@@ -539,150 +461,148 @@
   
   <!-- JavaScript -->
   <script>
-    // Función para generar las listas de estadísticas (con links para perfiles)
-    const playersStats = [
-      { name: "Viktor", color: "#FFD700" },
-      { name: "Juan L", color: "#808080" },
-      { name: "Raul", color: "#800080" },
-      { name: "Curro", color: "#808080" },
-      { name: "Fer", color: "#00CCCC" }
-    ];
-    const porteros = [
-      { name: "Fran", color: "#800080" },
-      { name: "Sami", color: "#808080" },
-      { name: "Antonio", color: "#FFD700" },
-      { name: "Adri", color: "#00CCCC" }
-    ];
-    
-    function generateStats(listEl, players) {
-      listEl.innerHTML = "";
-      players.forEach(player => {
-        listEl.innerHTML += `<li><span style="background-color: ${player.color};"></span> <a href="#" class="player-link" data-player="${encodeURIComponent(player.name)}">${player.name}</a>: 0</li>`;
-      });
-    }
-    
-    window.addEventListener("load", () => {
+    document.addEventListener("DOMContentLoaded", function() {
+      // Datos para las estadísticas
+      const playersStats = [
+        { name: "Viktor", color: "#FFD700" },
+        { name: "Juan L", color: "#808080" },
+        { name: "Raul", color: "#800080" },
+        { name: "Curro", color: "#808080" },
+        { name: "Fer", color: "#00CCCC" }
+      ];
+      const porteros = [
+        { name: "Fran", color: "#800080" },
+        { name: "Sami", color: "#808080" },
+        { name: "Antonio", color: "#FFD700" },
+        { name: "Adri", color: "#00CCCC" }
+      ];
+      
+      function generateStats(listEl, players) {
+        listEl.innerHTML = "";
+        players.forEach(player => {
+          listEl.innerHTML += `<li><span style="background-color: ${player.color};"></span> <a href="#" class="player-link" data-player="${encodeURIComponent(player.name)}">${player.name}</a>: 0</li>`;
+        });
+      }
+      
       generateStats(document.getElementById("ulGoles"), playersStats);
       generateStats(document.getElementById("ulAsistencias"), playersStats);
       generateStats(document.getElementById("ulTarjetasAmarillas"), playersStats);
       generateStats(document.getElementById("ulTarjetasRojas"), playersStats);
       generateStats(document.getElementById("ulGolesRecibidos"), porteros);
-    });
-    
-    // Alternar visibilidad de las secciones
-    const btnClasificacion = document.getElementById("btnClasificacion");
-    const btnEstadisticas = document.getElementById("btnEstadisticas");
-    const btnNoticias = document.getElementById("btnNoticias");
-    const btnEquipos = document.getElementById("btnEquipos");
-    
-    const sectionClasificacion = document.getElementById("sectionClasificacion");
-    const sectionEstadisticas = document.getElementById("sectionEstadisticas");
-    const sectionNoticias = document.getElementById("sectionNoticias");
-    const sectionEquipos = document.getElementById("sectionEquipos");
-    
-    const sections = [sectionClasificacion, sectionEstadisticas, sectionNoticias, sectionEquipos];
-    const buttons = [btnClasificacion, btnEstadisticas, btnNoticias, btnEquipos];
-    
-    function cerrarSecciones() {
-      sections.forEach(sec => sec.classList.remove("visible"));
-      buttons.forEach(btn => {
-        if (btn === btnClasificacion) btn.textContent = "Clasificación";
-        if (btn === btnEstadisticas) btn.textContent = "Estadísticas";
-        if (btn === btnNoticias) btn.textContent = "Noticias";
-        if (btn === btnEquipos) btn.textContent = "Equipos";
-      });
-    }
-    
-    btnClasificacion.addEventListener("click", () => {
-      if (!sectionClasificacion.classList.contains("visible")) {
-        cerrarSecciones();
-        sectionClasificacion.classList.add("visible");
-        btnClasificacion.textContent = "Ocultar Clasificación";
-      } else {
-        sectionClasificacion.classList.remove("visible");
-        btnClasificacion.textContent = "Clasificación";
-      }
-    });
-    
-    btnEstadisticas.addEventListener("click", () => {
-      if (!sectionEstadisticas.classList.contains("visible")) {
-        cerrarSecciones();
-        sectionEstadisticas.classList.add("visible");
-        btnEstadisticas.textContent = "Ocultar Estadísticas";
-      } else {
-        sectionEstadisticas.classList.remove("visible");
-        btnEstadisticas.textContent = "Estadísticas";
-      }
-    });
-    
-    btnNoticias.addEventListener("click", () => {
-      if (!sectionNoticias.classList.contains("visible")) {
-        cerrarSecciones();
-        sectionNoticias.classList.add("visible");
-        btnNoticias.textContent = "Ocultar Noticias";
-      } else {
-        sectionNoticias.classList.remove("visible");
-        btnNoticias.textContent = "Noticias";
-      }
-    });
-    
-    btnEquipos.addEventListener("click", () => {
-      if (!sectionEquipos.classList.contains("visible")) {
-        cerrarSecciones();
-        sectionEquipos.classList.add("visible");
-        btnEquipos.textContent = "Ocultar Equipos";
-      } else {
-        sectionEquipos.classList.remove("visible");
-        btnEquipos.textContent = "Equipos";
-      }
-    });
-    
-    // Lógica para los cards colapsables en la sección de Equipos
-    document.querySelectorAll('.team-card .card-header').forEach(header => {
-      header.addEventListener('click', () => {
-        const currentCard = header.parentElement;
-        document.querySelectorAll('.team-card').forEach(card => {
-          if (card !== currentCard) {
-            card.classList.remove('active');
-          }
+      
+      // Alternar visibilidad de secciones
+      const btnClasificacion = document.getElementById("btnClasificacion");
+      const btnEstadisticas = document.getElementById("btnEstadisticas");
+      const btnNoticias = document.getElementById("btnNoticias");
+      const btnEquipos = document.getElementById("btnEquipos");
+      
+      const sectionClasificacion = document.getElementById("sectionClasificacion");
+      const sectionEstadisticas = document.getElementById("sectionEstadisticas");
+      const sectionNoticias = document.getElementById("sectionNoticias");
+      const sectionEquipos = document.getElementById("sectionEquipos");
+      
+      const sections = [sectionClasificacion, sectionEstadisticas, sectionNoticias, sectionEquipos];
+      const buttons = [btnClasificacion, btnEstadisticas, btnNoticias, btnEquipos];
+      
+      function cerrarSecciones() {
+        sections.forEach(sec => sec.classList.remove("visible"));
+        buttons.forEach(btn => {
+          if (btn === btnClasificacion) btn.textContent = "Clasificación";
+          if (btn === btnEstadisticas) btn.textContent = "Estadísticas";
+          if (btn === btnNoticias) btn.textContent = "Noticias";
+          if (btn === btnEquipos) btn.textContent = "Equipos";
         });
-        currentCard.classList.toggle('active');
-      });
-    });
-    
-    // Modal para perfiles de jugadores
-    const modal = document.getElementById("profileModal");
-    const modalName = document.getElementById("modalName");
-    const modalImg = document.getElementById("modalImg");
-    const modalClose = document.querySelector(".modal-close");
-    
-    // Función para abrir el modal con datos del jugador (en este ejemplo, solo se muestra el nombre)
-    function openProfile(playerName) {
-      modalName.textContent = decodeURIComponent(playerName);
-      // Puedes modificar la URL de la imagen o cargarla dinámicamente según el jugador.
-      modalImg.src = "https://via.placeholder.com/200";
-      modal.style.display = "flex";
-    }
-    
-    // Agregar evento a todos los links de jugador
-    document.querySelectorAll(".player-link").forEach(link => {
-      link.addEventListener("click", (e) => {
-        e.preventDefault();
-        const player = e.target.getAttribute("data-player");
-        openProfile(player);
-      });
-    });
-    
-    // Cerrar el modal cuando se haga clic en la "X"
-    modalClose.addEventListener("click", () => {
-      modal.style.display = "none";
-    });
-    
-    // Cerrar el modal si se hace clic fuera del contenido
-    window.addEventListener("click", (event) => {
-      if (event.target == modal) {
-        modal.style.display = "none";
       }
+      
+      btnClasificacion.addEventListener("click", () => {
+        if (!sectionClasificacion.classList.contains("visible")) {
+          cerrarSecciones();
+          sectionClasificacion.classList.add("visible");
+          btnClasificacion.textContent = "Ocultar Clasificación";
+        } else {
+          sectionClasificacion.classList.remove("visible");
+          btnClasificacion.textContent = "Clasificación";
+        }
+      });
+      
+      btnEstadisticas.addEventListener("click", () => {
+        if (!sectionEstadisticas.classList.contains("visible")) {
+          cerrarSecciones();
+          sectionEstadisticas.classList.add("visible");
+          btnEstadisticas.textContent = "Ocultar Estadísticas";
+        } else {
+          sectionEstadisticas.classList.remove("visible");
+          btnEstadisticas.textContent = "Estadísticas";
+        }
+      });
+      
+      btnNoticias.addEventListener("click", () => {
+        if (!sectionNoticias.classList.contains("visible")) {
+          cerrarSecciones();
+          sectionNoticias.classList.add("visible");
+          btnNoticias.textContent = "Ocultar Noticias";
+        } else {
+          sectionNoticias.classList.remove("visible");
+          btnNoticias.textContent = "Noticias";
+        }
+      });
+      
+      btnEquipos.addEventListener("click", () => {
+        if (!sectionEquipos.classList.contains("visible")) {
+          cerrarSecciones();
+          sectionEquipos.classList.add("visible");
+          btnEquipos.textContent = "Ocultar Equipos";
+        } else {
+          sectionEquipos.classList.remove("visible");
+          btnEquipos.textContent = "Equipos";
+        }
+      });
+      
+      // Lógica para los cards colapsables de Equipos
+      document.querySelectorAll('.team-card .card-header').forEach(header => {
+        header.addEventListener('click', () => {
+          const currentCard = header.parentElement;
+          document.querySelectorAll('.team-card').forEach(card => {
+            if (card !== currentCard) {
+              card.classList.remove('active');
+            }
+          });
+          currentCard.classList.toggle('active');
+        });
+      });
+      
+      // Función para abrir el modal de perfil
+      const modal = document.getElementById("profileModal");
+      const modalName = document.getElementById("modalName");
+      const modalImg = document.getElementById("modalImg");
+      const modalClose = document.querySelector(".modal-close");
+      
+      function openProfile(playerName) {
+        modalName.textContent = decodeURIComponent(playerName);
+        modalImg.src = "https://via.placeholder.com/200";
+        modal.style.display = "flex";
+      }
+      
+      // Asignar eventos a todos los player-link (esto se realiza aquí para asegurar que existan)
+      document.querySelectorAll(".player-link").forEach(link => {
+        link.addEventListener("click", function(e) {
+          e.preventDefault();
+          e.stopPropagation(); // Evita que se active otro evento de click colapsable
+          const playerName = link.getAttribute("data-player");
+          openProfile(playerName);
+        });
+      });
+      
+      // Cerrar el modal
+      modalClose.addEventListener("click", () => {
+        modal.style.display = "none";
+      });
+      window.addEventListener("click", (event) => {
+        if (event.target === modal) {
+          modal.style.display = "none";
+        }
+      });
+      
     });
   </script>
   
@@ -704,7 +624,7 @@
     </div>
   </div>
   
-  <!-- Estilos para Modal -->
+  <!-- Estilos para el Modal -->
   <style>
     .modal {
       display: none;
