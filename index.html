@@ -3,31 +3,37 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Suburbios Legaue</title>
+  <title>Suburbios League</title>
   <link rel="manifest" href="manifest.json">
-  <!-- Importar la fuente Poppins -->
+  <!-- Google Fonts: Poppins -->
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
   <style>
-    /* Fondo general y tipografía */
+    /* ===== Estilos generales ===== */
     body {
       font-family: 'Poppins', sans-serif;
       margin: 0;
       padding: 20px;
-      background-color: #FAF3DD;
+      background-color: #FAF3DD; /* crema */
       color: #4A2C2A;
     }
-    
-    /* Enlaces de jugador: mantiene el color y subraya al pasar el cursor */
-    .player-link {
-      color: inherit;
-      text-decoration: none;
-      cursor: pointer;
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 20px;
     }
-    .player-link:hover {
-      text-decoration: underline;
+    header h1 {
+      font-size: 2.5em;
+      margin: 0;
     }
-    
-    /* Logo superior derecho (Instagram) */
+    header img {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+
+    /* Logo Instagram */
     .top-right-logo {
       position: fixed;
       top: 10px;
@@ -37,84 +43,63 @@
       z-index: 50;
     }
     .top-right-logo img {
-      width: 100%;
-      height: auto;
+      width: 100%; height: auto;
       border-radius: 5px;
       cursor: pointer;
     }
-    
-    /* Cabecera: Título e imagen */
-    header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 15px;
-      margin-bottom: 20px;
-    }
-    header h1 {
-      margin: 0;
-      font-size: 2.5em;
-    }
-    header img {
-      width: 80px;
-      height: 80px;
-      object-fit: cover;
-      border-radius: 50%;
-    }
-    
-    /* Navegación de categorías */
+
+    /* Navegación */
     .nav-container {
       display: flex;
       justify-content: center;
-      gap: 10px;
       flex-wrap: wrap;
+      gap: 10px;
       margin-bottom: 20px;
     }
     .nav-container button {
-      background: linear-gradient(145deg, #F2D7D9, #E6B0AA);
-      border: none;
       padding: 12px 24px;
+      border: none;
       border-radius: 30px;
-      cursor: pointer;
-      font-size: 16px;
+      background: linear-gradient(145deg, #F2D7D9, #E6B0AA);
       color: #4A2C2A;
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      cursor: pointer;
       box-shadow: 3px 3px 6px rgba(74,44,42,0.3);
+      transition: transform .2s, box-shadow .2s;
     }
     .nav-container button:hover {
       transform: scale(1.05);
       box-shadow: 4px 4px 8px rgba(74,44,42,0.4);
     }
-    
-    /* Secciones principales */
+
+    /* Secciones colapsables */
     section {
       max-height: 0;
       overflow: hidden;
       opacity: 0;
-      background-color: #F2D7D9;
-      padding: 0 20px;
       margin-bottom: 20px;
+      background: #F2D7D9;
       border-radius: 5px;
       box-shadow: 0 2px 4px rgba(74,44,42,0.2);
-      transition: max-height 0.5s ease-out, opacity 0.5s ease;
+      transition: max-height .5s ease-out, opacity .5s;
     }
     section.visible {
+      max-height: 1000px;
       opacity: 1;
       padding: 20px;
-      max-height: 1000px;
     }
     section h2 {
+      margin-top: 0;
       color: #4A2C2A;
       border-bottom: 2px solid #4A2C2A;
       padding-bottom: 5px;
       margin-bottom: 15px;
     }
-    
-    /* Sección de Clasificación: Tabla Compacta (Equipo, PJ, GF, GC, PTS) */
+
+    /* Tabla Clasificación */
     #sectionClasificacion table {
       width: 100%;
       border-collapse: collapse;
-      background-color: #fff;
+      background: #fff;
       font-size: 14px;
     }
     #sectionClasificacion th,
@@ -124,7 +109,7 @@
       border: 1px solid #ddd;
     }
     #sectionClasificacion thead {
-      background-color: #4A2C2A;
+      background: #4A2C2A;
       color: #fff;
     }
     .team-name {
@@ -133,82 +118,50 @@
       gap: 8px;
     }
     .color-indicator {
-      display: inline-block;
       width: 14px;
       height: 14px;
       border-radius: 50%;
+      display: inline-block;
     }
-    .drink-team .color-indicator { background-color: #800080; }
-    .recreativo .color-indicator { background-color: #FFD700; }
-    .cepilla .color-indicator { background-color: #808080; }
-    .borussia .color-indicator { background-color: #00FFFF; }
-    
-    /* Sección de Estadísticas */
+    .drink-team .color-indicator    { background: #800080; }
+    .recreativo .color-indicator    { background: #FFD700; }
+    .cepilla .color-indicator       { background: #808080; }
+    .borussia .color-indicator      { background: #00FFFF; }
+
+    /* Estadísticas */
     .stats-container {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(180px,1fr));
       gap: 15px;
     }
     .stat-card {
-      background: linear-gradient(145deg, #ffffff, #f9f9f9);
+      background: linear-gradient(145deg,#fff,#f9f9f9);
       border: 1px solid #ddd;
       border-radius: 5px;
       padding: 15px;
       text-align: center;
       box-shadow: 2px 2px 5px rgba(74,44,42,0.15);
-      transition: transform 0.2s ease;
+      transition: transform .2s;
     }
-    .stat-card:hover {
-      transform: translateY(-5px);
+    .stat-card:hover { transform: translateY(-5px); }
+    .stat-card h3 { margin: 0 0 10px; color: #4A2C2A; font-size: 20px; }
+    .stat-card ul { list-style: none; padding: 0; }
+    .stat-card li {
+      display: flex; align-items: center; gap: 8px;
+      font-size: 18px; font-weight: 600; color: #4A2C2A; margin: 5px 0;
     }
-    .stat-card h3 {
-      margin: 0 0 10px;
-      color: #4A2C2A;
-      font-size: 20px;
-    }
-    .stat-card ul {
-      padding: 0;
-      list-style: none;
-    }
-    .stat-card ul li {
-      font-size: 18px;
-      margin: 5px 0;
-      font-weight: 600;
-      color: #4A2C2A;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-    .stat-card ul li span {
-      display: inline-block;
-      width: 10px;
-      height: 10px;
-      border-radius: 50%;
-    }
-    
-    /* Sección de Noticias: "COMING SOON" */
+    .stat-card li span { width: 10px; height: 10px; border-radius: 50%; display: inline-block; }
+
+    /* Noticias */
     #sectionNoticias ul {
-      padding: 0;
-      list-style: none;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100px;
-      font-size: 2em;
-      font-weight: 700;
-      font-family: 'Courier New', Courier, monospace;
-      color: #4A2C2A;
+      display: flex; justify-content: center; align-items: center;
+      padding: 0; list-style: none; height: 100px;
+      font: bold 2em 'Courier New', monospace; color: #4A2C2A;
     }
-    #sectionNoticias ul li {
-      margin: 0;
-    }
-    
-    /* Sección de Equipos: Cards Colapsables */
-    #sectionEquipos .team-cards {
-      display: flex;
-      flex-direction: column;
-      gap: 15px;
-    }
+    #sectionNoticias li { margin: 0; }
+
+    /* Equipos: cards colapsables */
+    .team-cards { display: flex; flex-direction: column; gap: 15px; }
     .team-card {
       border: 1px solid #E6B0AA;
       border-radius: 5px;
@@ -221,66 +174,73 @@
       color: #fff;
       cursor: pointer;
     }
-    .team-card.drink-team .card-header { background-color: #800080; }
-    .team-card.cepilla .card-header { background-color: #808080; }
-    .team-card.recreativo .card-header { background-color: #FFD700; color: #4A2C2A; }
-    .team-card.borussia .card-header { background-color: #00CCCC; }
-    .team-card .card-body {
-      display: none;
-      padding: 10px;
-    }
-    .team-card.active .card-body {
-      display: block;
-    }
-    .lineup {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 10px;
-    }
-    .defense, .midfield {
-      display: flex;
-      gap: 10px;
-      justify-content: center;
-    }
+    .team-card.drink-team    .card-header { background: #800080; }
+    .team-card.cepilla       .card-header { background: #808080; }
+    .team-card.recreativo    .card-header { background: #FFD700; color: #4A2C2A; }
+    .team-card.borussia      .card-header { background: #00CCCC; }
+
+    .team-card .card-body { display: none; padding: 10px; }
+    .team-card.active .card-body { display: block; }
+
+    .lineup { display: flex; flex-direction: column; align-items: center; gap: 10px; }
+    .defense, .midfield { display: flex; gap: 10px; justify-content: center; }
     .position {
-      font-size: 16px;
-      font-weight: 600;
-      color: #4A2C2A;
-      background-color: #F9F3F3;
-      padding: 5px 10px;
-      border-radius: 20px;
-      text-align: center;
-      min-width: 70px;
+      background: #F9F3F3; color: #4A2C2A;
+      padding: 5px 10px; border-radius: 20px;
+      font-weight: 600; text-align: center; min-width: 70px;
     }
-    
-    /* Sección Comparar Jugadores (placeholder) */
+
+    /* Comparar Jugadores */
     #sectionComparar {
-      font-family: 'Courier New', Courier, monospace;
-      text-align: center;
-      padding: 20px;
-      font-size: 1.8em;
+      text-align: center; padding: 20px;
+      font: bold 1.8em 'Courier New', monospace; color: #4A2C2A;
+    }
+
+    /* Pop‑ups de jugador */
+    .player-link { color: inherit; text-decoration: none; cursor: pointer; }
+    .player-link:hover { text-decoration: underline; }
+
+    /* Modal */
+    .modal {
+      display: none; position: fixed; inset: 0;
+      background: rgba(0,0,0,0.5);
+      align-items: center; justify-content: center;
+      z-index: 10000;
+    }
+    .modal-content {
+      background: #fff; border-radius: 8px;
+      padding: 20px; max-width: 400px; width: 90%;
+      box-shadow: 0 2px 4px rgba(74,44,42,0.2);
+      position: relative;
+    }
+    .modal-close {
+      position: absolute; top: 10px; right: 10px;
+      font-size: 24px; font-weight: bold; cursor: pointer;
       color: #4A2C2A;
     }
-    
-    /* Media Queries para móviles */
-    @media (max-width: 600px) {
-      header h1 { font-size: 2em; }
-      .nav-container button { font-size: 14px; padding: 10px 20px; }
-      #sectionClasificacion table { font-size: 13px; }
-      #sectionEquipos .team-cards { flex-direction: column; }
-      .stat-card { padding: 10px; font-size: 16px; }
+    .modal-content img {
+      display: block; margin: 0 auto 20px;
+      width: 100%; max-width: 200px; border-radius: 50%;
+    }
+    .modal-content h1 { text-align: center; margin-bottom: 10px; }
+    .modal-content p { text-align: center; margin: 10px 0; }
+
+    /* Responsive */
+    @media (max-width:600px) {
+      header h1 { font-size:2em; }
+      .nav-container button { padding:10px 20px; font-size:14px; }
+      #sectionClasificacion table { font-size:13px; }
     }
   </style>
-  <link rel="manifest" href="manifest.json">
 </head>
 <body>
+
   <header>
-    <h1>Suburbios Legaue</h1>
-    <img src="https://i.imgur.com/9Hx9mZ4.jpeg" alt="Imagen de Árbol">
+    <h1>Suburbios League</h1>
+    <img src="https://i.imgur.com/9Hx9mZ4.jpeg" alt="Logo">
   </header>
-  
-  <!-- Navegación de categorías -->
+
+  <!-- Navegación -->
   <div class="nav-container">
     <button id="btnClasificacion">Clasificación</button>
     <button id="btnEstadisticas">Estadísticas</button>
@@ -288,88 +248,59 @@
     <button id="btnEquipos">Equipos</button>
     <button id="btnComparar">Comparar Jugadores</button>
   </div>
-  
-  <!-- Sección de Clasificación (Simplificada) -->
+
+  <!-- Clasificación -->
   <section id="sectionClasificacion">
     <h2>Clasificación</h2>
     <table>
       <thead>
-        <tr>
-          <th>Equipo</th>
-          <th>PJ</th>
-          <th>GF</th>
-          <th>GC</th>
-          <th>PTS</th>
-        </tr>
+        <tr><th>Equipo</th><th>PJ</th><th>GF</th><th>GC</th><th>PTS</th></tr>
       </thead>
       <tbody>
         <tr class="drink-team">
-          <td class="team-name"><span class="color-indicator"></span>DRINK TEAM</td>
-          <td>0</td><td>0</td><td>0</td><td>0</td>
+          <td class="team-name"><span class="color-indicator"></span>DRINK TEAM</td><td>0</td><td>0</td><td>0</td><td>0</td>
         </tr>
         <tr class="cepilla">
-          <td class="team-name"><span class="color-indicator"></span>CEPILLA FC</td>
-          <td>0</td><td>0</td><td>0</td><td>0</td>
+          <td class="team-name"><span class="color-indicator"></span>CEPILLA FC</td><td>0</td><td>0</td><td>0</td><td>0</td>
         </tr>
         <tr class="recreativo">
-          <td class="team-name"><span class="color-indicator"></span>RECREATIVO DE JUERGA</td>
-          <td>0</td><td>0</td><td>0</td><td>0</td>
+          <td class="team-name"><span class="color-indicator"></span>RECREATIVO DE JUERGA</td><td>0</td><td>0</td><td>0</td><td>0</td>
         </tr>
         <tr class="borussia">
-          <td class="team-name"><span class="color-indicator"></span>BORUSSIA DONUTS</td>
-          <td>0</td><td>0</td><td>0</td><td>0</td>
+          <td class="team-name"><span class="color-indicator"></span>BORUSSIA DONUTS</td><td>0</td><td>0</td><td>0</td><td>0</td>
         </tr>
       </tbody>
     </table>
   </section>
-  
-  <!-- Sección de Estadísticas -->
+
+  <!-- Estadísticas -->
   <section id="sectionEstadisticas">
     <h2>Estadísticas</h2>
     <div class="stats-container">
-      <div class="stat-card">
-        <h3>Goles</h3>
-        <ul id="ulGoles"></ul>
-      </div>
-      <div class="stat-card">
-        <h3>Asistencias</h3>
-        <ul id="ulAsistencias"></ul>
-      </div>
-      <div class="stat-card">
-        <h3>Goles Recibidos</h3>
-        <ul id="ulGolesRecibidos"></ul>
-      </div>
-      <div class="stat-card">
-        <h3>Tarjetas Amarillas</h3>
-        <ul id="ulTarjetasAmarillas"></ul>
-      </div>
-      <div class="stat-card">
-        <h3>Tarjetas Rojas</h3>
-        <ul id="ulTarjetasRojas"></ul>
-      </div>
+      <div class="stat-card"><h3>Goles</h3><ul id="ulGoles"></ul></div>
+      <div class="stat-card"><h3>Asistencias</h3><ul id="ulAsistencias"></ul></div>
+      <div class="stat-card"><h3>Goles Recibidos</h3><ul id="ulGolesRecibidos"></ul></div>
+      <div class="stat-card"><h3>Tarjetas Amarillas</h3><ul id="ulTarjetasAmarillas"></ul></div>
+      <div class="stat-card"><h3>Tarjetas Rojas</h3><ul id="ulTarjetasRojas"></ul></div>
     </div>
   </section>
-  
-  <!-- Sección de Noticias (COMING SOON) -->
+
+  <!-- Noticias -->
   <section id="sectionNoticias">
     <h2>Noticias</h2>
-    <ul>
-      <li>COMING SOON</li>
-    </ul>
+    <ul><li>COMING SOON</li></ul>
   </section>
-  
-  <!-- Sección de Equipos: Cards Colapsables -->
+
+  <!-- Equipos -->
   <section id="sectionEquipos">
     <h2>Equipos</h2>
     <div class="team-cards">
-      <!-- Card DRINK TEAM -->
+      <!-- DRINK TEAM -->
       <div class="team-card drink-team">
         <div class="card-header">DRINK TEAM</div>
         <div class="card-body">
           <div class="lineup">
-            <div class="position portero">
-              <a href="#" class="player-link" data-player="Fran">Fran</a>
-            </div>
+            <div class="position portero"><a href="#" class="player-link" data-player="Fran">Fran</a></div>
             <div class="defense">
               <div class="position"><a href="#" class="player-link" data-player="Raul">Raul</a></div>
               <div class="position"><a href="#" class="player-link" data-player="Juan">Juan</a></div>
@@ -379,20 +310,16 @@
               <div class="position"><a href="#" class="player-link" data-player="Lay">Lay</a></div>
               <div class="position"><a href="#" class="player-link" data-player="Kuki">Kuki</a></div>
             </div>
-            <div class="position delantero">
-              <a href="#" class="player-link" data-player="Nacho">Nacho</a>
-            </div>
+            <div class="position delantero"><a href="#" class="player-link" data-player="Nacho">Nacho</a></div>
           </div>
         </div>
       </div>
-      <!-- Card CEPILLA FC -->
+      <!-- CEPILLA FC -->
       <div class="team-card cepilla">
         <div class="card-header">CEPILLA FC</div>
         <div class="card-body">
           <div class="lineup">
-            <div class="position portero">
-              <a href="#" class="player-link" data-player="Sami">Sami</a>
-            </div>
+            <div class="position portero"><a href="#" class="player-link" data-player="Sami">Sami</a></div>
             <div class="defense">
               <div class="position"><a href="#" class="player-link" data-player="Marko">Marko</a></div>
               <div class="position"><a href="#" class="player-link" data-player="HDG">HDG</a></div>
@@ -402,20 +329,16 @@
               <div class="position"><a href="#" class="player-link" data-player="Juan L">Juan L</a></div>
               <div class="position"><a href="#" class="player-link" data-player="Nestor">Nestor</a></div>
             </div>
-            <div class="position delantero">
-              <a href="#" class="player-link" data-player="Curro">Curro</a>
-            </div>
+            <div class="position delantero"><a href="#" class="player-link" data-player="Curro">Curro</a></div>
           </div>
         </div>
       </div>
-      <!-- Card RECREATIVO DE JUERGA -->
+      <!-- RECREATIVO DE JUERGA -->
       <div class="team-card recreativo">
         <div class="card-header">RECREATIVO DE JUERGA</div>
         <div class="card-body">
           <div class="lineup">
-            <div class="position portero">
-              <a href="#" class="player-link" data-player="Antonio">Antonio</a>
-            </div>
+            <div class="position portero"><a href="#" class="player-link" data-player="Antonio">Antonio</a></div>
             <div class="defense">
               <div class="position"><a href="#" class="player-link" data-player="Viktor">Viktor</a></div>
               <div class="position"><a href="#" class="player-link" data-player="Leo">Leo</a></div>
@@ -425,20 +348,16 @@
               <div class="position"><a href="#" class="player-link" data-player="Victor">Victor</a></div>
               <div class="position"><a href="#" class="player-link" data-player="Juanma">Juanma</a></div>
             </div>
-            <div class="position delantero">
-              <a href="#" class="player-link" data-player="Alex F.">Alex F.</a>
-            </div>
+            <div class="position delantero"><a href="#" class="player-link" data-player="Alex F.">Alex F.</a></div>
           </div>
         </div>
       </div>
-      <!-- Card BORUSSIA DONUTS -->
+      <!-- BORUSSIA DONUTS -->
       <div class="team-card borussia">
         <div class="card-header">BORUSSIA DONUTS</div>
         <div class="card-body">
           <div class="lineup">
-            <div class="position portero">
-              <a href="#" class="player-link" data-player="Adri">Adri</a>
-            </div>
+            <div class="position portero"><a href="#" class="player-link" data-player="Adri">Adri</a></div>
             <div class="defense">
               <div class="position"><a href="#" class="player-link" data-player="Niko">Niko</a></div>
               <div class="position"><a href="#" class="player-link" data-player="Carlos">Carlos</a></div>
@@ -448,307 +367,183 @@
               <div class="position"><a href="#" class="player-link" data-player="Esteban">Esteban</a></div>
               <div class="position"><a href="#" class="player-link" data-player="Alvaro">Alvaro</a></div>
             </div>
-            <div class="position delantero">
-              <a href="#" class="player-link" data-player="Fer">Fer</a>
-            </div>
+            <div class="position delantero"><a href="#" class="player-link" data-player="Fer">Fer</a></div>
           </div>
         </div>
       </div>
     </div>
   </section>
-  
-  <!-- Sección Comparar Jugadores (Placeholder) -->
+
+  <!-- Comparar Jugadores -->
   <section id="sectionComparar">
     <h2>Comparar Jugadores</h2>
     <p>COMING SOON</p>
   </section>
-  
-  <!-- Modal para Perfil de Jugador -->
+
+  <!-- Modal de Perfil de Jugador -->
   <div id="profileModal" class="modal">
     <div class="modal-content">
       <span class="modal-close">&times;</span>
       <img id="modalImg" src="https://via.placeholder.com/200" alt="Foto del Jugador">
       <h1 id="modalName">Jugador</h1>
-      <p id="modalData"><strong>Datos:</strong> Equipo – Posición – Color</p>
-      <p><strong>Descripción:</strong> Breve descripción del jugador...</p>
+      <p id="modalData">
+        <strong>Equipo:</strong> <span id="modalTeam"></span><br>
+        <strong>Posición:</strong> <span id="modalPosition"></span>
+      </p>
+      <p><strong>Descripción:</strong> Jugador destacado por su actuación en campo.</p>
     </div>
   </div>
-  
+
   <!-- JavaScript -->
   <script>
-    document.addEventListener("DOMContentLoaded", function() {
-      // Datos de perfiles de jugadores
-      const playerProfiles = {
-        "Fran": { team: "DRINK TEAM", position: "Portero", colorDetail: "Color representativo: #800080" },
-        "Raul": { team: "DRINK TEAM", position: "Defensa", colorDetail: "Color representativo: #800080" },
-        "Juan": { team: "DRINK TEAM", position: "Defensa", colorDetail: "Color representativo: #800080" },
-        "Alvaro": { team: "DRINK TEAM", position: "Defensa", colorDetail: "Color representativo: #800080" },
-        "Lay": { team: "DRINK TEAM", position: "Mediocampista", colorDetail: "Color representativo: #800080" },
-        "Kuki": { team: "DRINK TEAM", position: "Mediocampista", colorDetail: "Color representativo: #800080" },
-        "Nacho": { team: "DRINK TEAM", position: "Delantero", colorDetail: "Color representativo: #800080" },
-        
-        "Sami": { team: "CEPILLA FC", position: "Portero", colorDetail: "Color representativo: #808080" },
-        "Marko": { team: "CEPILLA FC", position: "Defensa", colorDetail: "Color representativo: #808080" },
-        "HDG": { team: "CEPILLA FC", position: "Defensa", colorDetail: "Color representativo: #808080" },
-        "Mariankas": { team: "CEPILLA FC", position: "Defensa", colorDetail: "Color representativo: #808080" },
-        "Juan L": { team: "CEPILLA FC", position: "Mediocampista", colorDetail: "Color representativo: #808080" },
-        "Nestor": { team: "CEPILLA FC", position: "Mediocampista", colorDetail: "Color representativo: #808080" },
-        "Curro": { team: "CEPILLA FC", position: "Delantero", colorDetail: "Color representativo: #808080" },
-        
-        "Antonio": { team: "RECREATIVO DE JUERGA", position: "Portero", colorDetail: "Color representativo: #FFD700" },
-        "Viktor": { team: "RECREATIVO DE JUERGA", position: "Defensa", colorDetail: "Color representativo: #FFD700" },
-        "Leo": { team: "RECREATIVO DE JUERGA", position: "Defensa", colorDetail: "Color representativo: #FFD700" },
-        "Robles": { team: "RECREATIVO DE JUERGA", position: "Defensa", colorDetail: "Color representativo: #FFD700" },
-        "Victor": { team: "RECREATIVO DE JUERGA", position: "Mediocampista", colorDetail: "Color representativo: #FFD700" },
-        "Juanma": { team: "RECREATIVO DE JUERGA", position: "Mediocampista", colorDetail: "Color representativo: #FFD700" },
-        "Alex F.": { team: "RECREATIVO DE JUERGA", position: "Delantero", colorDetail: "Color representativo: #FFD700" },
-        
-        "Adri": { team: "BORUSSIA DONUTS", position: "Portero", colorDetail: "Color representativo: #00CCCC" },
-        "Niko": { team: "BORUSSIA DONUTS", position: "Defensa", colorDetail: "Color representativo: #00CCCC" },
-        "Carlos": { team: "BORUSSIA DONUTS", position: "Defensa", colorDetail: "Color representativo: #00CCCC" },
-        "Alcaina": { team: "BORUSSIA DONUTS", position: "Defensa", colorDetail: "Color representativo: #00CCCC" },
-        "Esteban": { team: "BORUSSIA DONUTS", position: "Mediocampista", colorDetail: "Color representativo: #00CCCC" },
-        "Alvaro": { team: "BORUSSIA DONUTS", position: "Mediocampista", colorDetail: "Color representativo: #00CCCC" },
-        "Fer": { team: "BORUSSIA DONUTS", position: "Delantero", colorDetail: "Color representativo: #00CCCC" }
+    document.addEventListener("DOMContentLoaded", ()=> {
+      // Datos de perfil de todos los jugadores
+      const profiles = {
+        "Fran":  { team:"DRINK TEAM",    pos:"Portero" },
+        "Raul":  { team:"DRINK TEAM",    pos:"Defensa" },
+        "Juan":  { team:"DRINK TEAM",    pos:"Defensa" },
+        "Alvaro":{ team:"DRINK TEAM",    pos:"Defensa" },
+        "Lay":   { team:"DRINK TEAM",    pos:"Mediocampista" },
+        "Kuki":  { team:"DRINK TEAM",    pos:"Mediocampista" },
+        "Nacho": { team:"DRINK TEAM",    pos:"Delantero" },
+        "Sami":  { team:"CEPILLA FC",    pos:"Portero" },
+        "Marko": { team:"CEPILLA FC",    pos:"Defensa" },
+        "HDG":   { team:"CEPILLA FC",    pos:"Defensa" },
+        "Mariankas":{team:"CEPILLA FC",  pos:"Defensa" },
+        "Juan L":{ team:"CEPILLA FC",    pos:"Mediocampista" },
+        "Nestor":{ team:"CEPILLA FC",    pos:"Mediocampista" },
+        "Curro": { team:"CEPILLA FC",    pos:"Delantero" },
+        "Antonio":{team:"RECREATIVO DE JUERGA",pos:"Portero"},
+        "Viktor":{ team:"RECREATIVO DE JUERGA",pos:"Defensa"},
+        "Leo":   { team:"RECREATIVO DE JUERGA",pos:"Defensa"},
+        "Robles":{ team:"RECREATIVO DE JUERGA",pos:"Defensa"},
+        "Victor":{ team:"RECREATIVO DE JUERGA",pos:"Mediocampista"},
+        "Juanma":{ team:"RECREATIVO DE JUERGA",pos:"Mediocampista"},
+        "Alex F.":{team:"RECREATIVO DE JUERGA",pos:"Delantero"},
+        "Adri":  { team:"BORUSSIA DONUTS",pos:"Portero"},
+        "Niko":  { team:"BORUSSIA DONUTS",pos:"Defensa"},
+        "Carlos":{ team:"BORUSSIA DONUTS",pos:"Defensa"},
+        "Alcaina":{team:"BORUSSIA DONUTS",pos:"Defensa"},
+        "Esteban":{team:"BORUSSIA DONUTS",pos:"Mediocampista"},
+        "Alvaro":{ team:"BORUSSIA DONUTS",pos:"Mediocampista"},
+        "Fer":   { team:"BORUSSIA DONUTS",pos:"Delantero"}
       };
 
-      // Función para generar datos para la sección de Estadísticas
-      const playersStats = [
-        { name: "Viktor", color: "#FFD700" },
-        { name: "Juan L", color: "#808080" },
-        { name: "Raul", color: "#800080" },
-        { name: "Curro", color: "#808080" },
-        { name: "Fer", color: "#00CCCC" }
+      // Estadísticas fijas
+      const statsPlayers = [
+        {name:"Viktor",color:"#FFD700"},
+        {name:"Juan L",color:"#808080"},
+        {name:"Raul",color:"#800080"},
+        {name:"Curro",color:"#808080"},
+        {name:"Fer",color:"#00CCCC"}
       ];
-      const porteros = [
-        { name: "Fran", color: "#800080" },
-        { name: "Sami", color: "#808080" },
-        { name: "Antonio", color: "#FFD700" },
-        { name: "Adri", color: "#00CCCC" }
+      const keepers = [
+        {name:"Fran",color:"#800080"},
+        {name:"Sami",color:"#808080"},
+        {name:"Antonio",color:"#FFD700"},
+        {name:"Adri",color:"#00CCCC"}
       ];
-      
-      function generateStats(listEl, players) {
-        listEl.innerHTML = "";
-        players.forEach(player => {
-          listEl.innerHTML += `<li><span style="background-color: ${player.color};"></span> <a href="#" class="player-link" data-player="${encodeURIComponent(player.name)}">${player.name}</a>: 0</li>`;
+      function fillList(id, list) {
+        const ul=document.getElementById(id);
+        ul.innerHTML="";
+        list.forEach(p=>{
+          ul.innerHTML+=`<li><span style="background:${p.color}"></span>
+            <a href="#" class="player-link" data-player="${encodeURIComponent(p.name)}">${p.name}</a>: 0</li>`;
         });
       }
-      
-      generateStats(document.getElementById("ulGoles"), playersStats);
-      generateStats(document.getElementById("ulAsistencias"), playersStats);
-      generateStats(document.getElementById("ulTarjetasAmarillas"), playersStats);
-      generateStats(document.getElementById("ulTarjetasRojas"), playersStats);
-      generateStats(document.getElementById("ulGolesRecibidos"), porteros);
-      
-      // Alternar visibilidad de secciones
-      const btnClasificacion = document.getElementById("btnClasificacion");
-      const btnEstadisticas = document.getElementById("btnEstadisticas");
-      const btnNoticias = document.getElementById("btnNoticias");
-      const btnEquipos = document.getElementById("btnEquipos");
-      const btnComparar = document.getElementById("btnComparar");
-      
-      const sectionClasificacion = document.getElementById("sectionClasificacion");
-      const sectionEstadisticas = document.getElementById("sectionEstadisticas");
-      const sectionNoticias = document.getElementById("sectionNoticias");
-      const sectionEquipos = document.getElementById("sectionEquipos");
-      const sectionComparar = document.getElementById("sectionComparar");
-      
-      const sections = [sectionClasificacion, sectionEstadisticas, sectionNoticias, sectionEquipos, sectionComparar];
-      const buttons = [btnClasificacion, btnEstadisticas, btnNoticias, btnEquipos, btnComparar];
-      
-      function cerrarSecciones() {
-        sections.forEach(sec => sec.classList.remove("visible"));
-        buttons.forEach(btn => {
-          if (btn === btnClasificacion) btn.textContent = "Clasificación";
-          if (btn === btnEstadisticas) btn.textContent = "Estadísticas";
-          if (btn === btnNoticias) btn.textContent = "Noticias";
-          if (btn === btnEquipos) btn.textContent = "Equipos";
-          if (btn === btnComparar) btn.textContent = "Comparar Jugadores";
-        });
+      fillList("ulGoles", statsPlayers);
+      fillList("ulAsistencias", statsPlayers);
+      fillList("ulTarjetasAmarillas", statsPlayers);
+      fillList("ulTarjetasRojas", statsPlayers);
+      fillList("ulGolesRecibidos", keepers);
+
+      // Secciones y botones
+      const sections = {
+        cls: document.getElementById("sectionClasificacion"),
+        std: document.getElementById("sectionEstadisticas"),
+        nws: document.getElementById("sectionNoticias"),
+        eqp: document.getElementById("sectionEquipos"),
+        cmp: document.getElementById("sectionComparar")
+      };
+      const buttons = {
+        cls: document.getElementById("btnClasificacion"),
+        std: document.getElementById("btnEstadisticas"),
+        nws: document.getElementById("btnNoticias"),
+        eqp: document.getElementById("btnEquipos"),
+        cmp: document.getElementById("btnComparar")
+      };
+      function hideAll() {
+        Object.values(sections).forEach(s=>s.classList.remove("visible"));
+        buttons.cls.textContent="Clasificación";
+        buttons.std.textContent="Estadísticas";
+        buttons.nws.textContent="Noticias";
+        buttons.eqp.textContent="Equipos";
+        buttons.cmp.textContent="Comparar Jugadores";
       }
-      
-      btnClasificacion.addEventListener("click", () => {
-        if (!sectionClasificacion.classList.contains("visible")) {
-          cerrarSecciones();
-          sectionClasificacion.classList.add("visible");
-          btnClasificacion.textContent = "Ocultar Clasificación";
-        } else {
-          sectionClasificacion.classList.remove("visible");
-          btnClasificacion.textContent = "Clasificación";
-        }
-      });
-      
-      btnEstadisticas.addEventListener("click", () => {
-        if (!sectionEstadisticas.classList.contains("visible")) {
-          cerrarSecciones();
-          sectionEstadisticas.classList.add("visible");
-          btnEstadisticas.textContent = "Ocultar Estadísticas";
-        } else {
-          sectionEstadisticas.classList.remove("visible");
-          btnEstadisticas.textContent = "Estadísticas";
-        }
-      });
-      
-      btnNoticias.addEventListener("click", () => {
-        if (!sectionNoticias.classList.contains("visible")) {
-          cerrarSecciones();
-          sectionNoticias.classList.add("visible");
-          btnNoticias.textContent = "Ocultar Noticias";
-        } else {
-          sectionNoticias.classList.remove("visible");
-          btnNoticias.textContent = "Noticias";
-        }
-      });
-      
-      btnEquipos.addEventListener("click", () => {
-        if (!sectionEquipos.classList.contains("visible")) {
-          cerrarSecciones();
-          sectionEquipos.classList.add("visible");
-          btnEquipos.textContent = "Ocultar Equipos";
-        } else {
-          sectionEquipos.classList.remove("visible");
-          btnEquipos.textContent = "Equipos";
-        }
-      });
-      
-      btnComparar.addEventListener("click", () => {
-        if (!sectionComparar.classList.contains("visible")) {
-          cerrarSecciones();
-          sectionComparar.classList.add("visible");
-          btnComparar.textContent = "Ocultar Comparar Jugadores";
-        } else {
-          sectionComparar.classList.remove("visible");
-          btnComparar.textContent = "Comparar Jugadores";
-        }
-      });
-      
-      // Tarjetas colapsables de Equipos
-      document.querySelectorAll('.team-card .card-header').forEach(header => {
-        header.addEventListener('click', (e) => {
-          // Para evitar conflicto con la acción de modal, detén la propagación.
+      buttons.cls.onclick=()=>{
+        hideAll();
+        sections.cls.classList.toggle("visible");
+        buttons.cls.textContent=sections.cls.classList.contains("visible")?"Ocultar Clasificación":"Clasificación";
+      };
+      buttons.std.onclick=()=>{
+        hideAll();
+        sections.std.classList.toggle("visible");
+        buttons.std.textContent=sections.std.classList.contains("visible")?"Ocultar Estadísticas":"Estadísticas";
+      };
+      buttons.nws.onclick=()=>{
+        hideAll();
+        sections.nws.classList.toggle("visible");
+        buttons.nws.textContent=sections.nws.classList.contains("visible")?"Ocultar Noticias":"Noticias";
+      };
+      buttons.eqp.onclick=()=>{
+        hideAll();
+        sections.eqp.classList.toggle("visible");
+        buttons.eqp.textContent=sections.eqp.classList.contains("visible")?"Ocultar Equipos":"Equipos";
+      };
+      buttons.cmp.onclick=()=>{
+        hideAll();
+        sections.cmp.classList.toggle("visible");
+        buttons.cmp.textContent=sections.cmp.classList.contains("visible")?"Ocultar Comparar Jugadores":"Comparar Jugadores";
+      };
+
+      // Cards colapsables
+      document.querySelectorAll(".team-card .card-header").forEach(h=>{
+        h.addEventListener("click",e=>{
           e.stopPropagation();
-          const currentCard = header.parentElement;
-          document.querySelectorAll('.team-card').forEach(card => {
-            if (card !== currentCard) {
-              card.classList.remove('active');
-            }
-          });
-          currentCard.classList.toggle('active');
+          const card=h.parentElement;
+          document.querySelectorAll(".team-card").forEach(c=>{ if(c!==card) c.classList.remove("active"); });
+          card.classList.toggle("active");
         });
       });
-      
-      // Modal para perfiles de jugadores
+
+      // Modal de jugador
       const modal = document.getElementById("profileModal");
-      const modalName = document.getElementById("modalName");
-      const modalImg = document.getElementById("modalImg");
-      const modalData = document.getElementById("modalData");
-      const modalClose = document.querySelector(".modal-close");
-      
-      function openProfile(playerName) {
-        playerName = decodeURIComponent(playerName);
-        modalName.textContent = playerName;
-        modalImg.src = "https://via.placeholder.com/200";
-        // Buscar datos del jugador en playerProfiles
-        const profile = playerProfiles[playerName];
-        if (profile) {
-          modalData.innerHTML = `<strong>Datos:</strong> ${profile.team} – ${profile.position} – ${profile.colorDetail}`;
-        } else {
-          modalData.innerHTML = `<strong>Datos:</strong> No se han cargado datos.`;
-        }
-        modal.style.display = "flex";
-      }
-      
-      // Delegación de eventos para abrir el modal de perfil
-      document.addEventListener("click", function(e) {
-        if (e.target && e.target.classList.contains("player-link")) {
-          e.preventDefault();
-          e.stopPropagation();
-          const playerName = e.target.getAttribute("data-player");
-          openProfile(playerName);
+      const nameEl = document.getElementById("modalName");
+      const teamEl = document.getElementById("modalTeam");
+      const posEl  = document.getElementById("modalPosition");
+      const imgEl  = document.getElementById("modalImg");
+      document.addEventListener("click",e=>{
+        if(e.target.classList.contains("player-link")) {
+          e.preventDefault(); e.stopPropagation();
+          const player=decodeURIComponent(e.target.dataset.player);
+          const prof=profiles[player];
+          nameEl.textContent=player;
+          teamEl.textContent=prof? prof.team : "—";
+          posEl.textContent =prof? prof.pos  : "—";
+          imgEl.src="https://via.placeholder.com/200";
+          modal.style.display="flex";
         }
       });
-      
-      // Cerrar el modal
-      modalClose.addEventListener("click", () => {
-        modal.style.display = "none";
-      });
-      window.addEventListener("click", (event) => {
-        if (event.target === modal) {
-          modal.style.display = "none";
-        }
-      });
-      
+      document.querySelector(".modal-close").onclick = ()=> modal.style.display="none";
+      window.onclick = evt=> { if(evt.target===modal) modal.style.display="none"; };
     });
   </script>
-  
-  <!-- Bloque de ícono de Instagram en la esquina superior derecha -->
+
+  <!-- Logo Instagram -->
   <div class="top-right-logo">
-    <a href="https://www.instagram.com/suburbiosleague/" target="_blank" title="Instagram">
-      <img src="https://1000logos.net/wp-content/uploads/2017/02/New-Instagram-logo.jpg" alt="Instagram Logo">
+    <a href="https://www.instagram.com/suburbiosleague/" target="_blank">
+      <img src="https://1000logos.net/wp-content/uploads/2017/02/New-Instagram-logo.jpg" alt="Instagram">
     </a>
   </div>
-  
-  <!-- Modal para Perfil de Jugador -->
-  <div id="profileModal" class="modal">
-    <div class="modal-content">
-      <span class="modal-close">&times;</span>
-      <img id="modalImg" src="https://via.placeholder.com/200" alt="Foto del Jugador">
-      <h1 id="modalName">Jugador</h1>
-      <p id="modalData"><strong>Datos:</strong> Equipo – Posición – Color</p>
-      <p><strong>Descripción:</strong> Breve descripción del jugador...</p>
-    </div>
-  </div>
-  
-  <!-- Estilos para el Modal -->
-  <style>
-    .modal {
-      display: none;
-      position: fixed;
-      z-index: 10000;
-      left: 0;
-      top: 0;
-      width: 100%;
-      height: 100%;
-      overflow: auto;
-      background-color: rgba(0,0,0,0.5);
-      align-items: center;
-      justify-content: center;
-    }
-    .modal-content {
-      background-color: #fff;
-      margin: auto;
-      border-radius: 8px;
-      padding: 20px;
-      width: 90%;
-      max-width: 400px;
-      box-shadow: 0 2px 4px rgba(74,44,42,0.2);
-      position: relative;
-    }
-    .modal-close {
-      position: absolute;
-      right: 10px;
-      top: 10px;
-      font-size: 24px;
-      font-weight: bold;
-      cursor: pointer;
-      color: #4A2C2A;
-    }
-    .modal-content img {
-      width: 100%;
-      max-width: 200px;
-      border-radius: 50%;
-      display: block;
-      margin: 0 auto 20px;
-    }
-    .modal-content h1 {
-      text-align: center;
-      margin-bottom: 10px;
-    }
-    .modal-content p {
-      text-align: center;
-      margin: 10px 0;
-    }
-  </style>
-  
 </body>
 </html>
