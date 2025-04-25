@@ -323,7 +323,12 @@
               <div class="position"><a href="#" class="player-link" data-player="Alvaro">Alvaro</a></div>
             </div>
             <div class="midfield">
-              <div class="position"><a href="#" class="player-link" data-player="Lay">Lay</a></div>
+              <!-- Nuevo: muestra la imagen lay.png en lugar del texto -->
+<div class="position">
+  <a href="#" class="player-link" data-player="Lay">
+    <img src="lay.png" alt="Lay" style="width:50px; height:50px; border-radius:50%;">
+  </a>
+</div>
               <div class="position"><a href="#" class="player-link" data-player="Kuki">Kuki</a></div>
             </div>
             <div class="position delantero"><a href="#" class="player-link" data-player="Nacho">Nacho</a></div>
@@ -413,8 +418,7 @@
         <strong>Equipo:</strong> <span id="modalTeam"></span><br>
         <strong>Posición:</strong> <span id="modalPosition"></span>
       </p>
-      <p><strong>Descripción:</strong> Jugador destacado por su actuación en campo.</p>
-    </div>
+          </div>
   </div>
 
   <!-- GLOBAL profiles para todos los scripts -->
@@ -424,7 +428,7 @@
       "Raul":  { team:"DRINK TEAM",    pos:"Defensa" },
       "Juan":  { team:"DRINK TEAM",    pos:"Defensa" },
       "Alvaro":{ team:"DRINK TEAM",    pos:"Defensa" },
-      "Lay":   { team:"DRINK TEAM",    pos:"Mediocampista" },
+      "Lay":   { team:"DRINK TEAM",    pos:"Mediocampista", img:"lay.png" },
       "Kuki":  { team:"DRINK TEAM",    pos:"Mediocampista" },
       "Nacho": { team:"DRINK TEAM",    pos:"Delantero" },
       "Sami":  { team:"CEPILLA FC",    pos:"Portero" },
@@ -547,18 +551,25 @@
       const teamEl = document.getElementById("modalTeam");
       const posEl  = document.getElementById("modalPosition");
       const imgEl  = document.getElementById("modalImg");
-      document.addEventListener("click", e=>{
-        if(e.target.classList.contains("player-link")) {
-          e.preventDefault(); e.stopPropagation();
-          const player = decodeURIComponent(e.target.dataset.player);
-          const prof = profiles[player];
-          nameEl.textContent = player;
-          teamEl.textContent = prof? prof.team : "—";
-          posEl.textContent  = prof? prof.pos  : "—";
-          imgEl.src = "https://via.placeholder.com/200";
-          modal.style.display = "flex";
-        }
-      });
+     // == Sustituye por esto ==
+document.addEventListener("click", e => {
+  // Si haces clic dentro de un <a class="player-link"> (o en su <img>), esto lo captura
+  const link = e.target.closest(".player-link");
+  if (!link) return;
+
+  e.preventDefault();
+  e.stopPropagation();
+
+  const player = decodeURIComponent(link.dataset.player);
+  const prof   = profiles[player];
+
+  // Rellena el modal
+  nameEl.textContent     = player;
+  teamEl.textContent     = prof ? prof.team : "—";
+  posEl.textContent      = prof ? prof.pos  : "—";
+  imgEl.src              = prof.img || "https://via.placeholder.com/200";
+  modal.style.display    = "flex";
+});     
       document.querySelector(".modal-close").onclick = ()=> modal.style.display="none";
       window.onclick = evt=> { if(evt.target===modal) modal.style.display="none"; };
     });
