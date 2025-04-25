@@ -32,8 +32,6 @@
       border-radius: 50%;
       object-fit: cover;
     }
-
-    /* Logo Instagram */
     .top-right-logo {
       position: fixed;
       top: 10px;
@@ -47,8 +45,6 @@
       border-radius: 5px;
       cursor: pointer;
     }
-
-    /* Navegación */
     .nav-container {
       display: flex;
       justify-content: center;
@@ -70,8 +66,6 @@
       transform: scale(1.05);
       box-shadow: 4px 4px 8px rgba(74,44,42,0.4);
     }
-
-    /* Secciones colapsables */
     section {
       max-height: 0;
       overflow: hidden;
@@ -160,28 +154,16 @@
     }
     #sectionNoticias li { margin: 0; }
 
-    /* Equipos: cards colapsables */
+    /* Equipos */
     .team-cards { display: flex; flex-direction: column; gap: 15px; }
-    .team-card {
-      border: 1px solid #E6B0AA;
-      border-radius: 5px;
-      overflow: hidden;
-    }
-    .team-card .card-header {
-      padding: 10px;
-      font-size: 18px;
-      font-weight: 600;
-      color: #fff;
-      cursor: pointer;
-    }
+    .team-card { border: 1px solid #E6B0AA; border-radius: 5px; overflow: hidden; }
+    .team-card .card-header { padding: 10px; font-size: 18px; font-weight: 600; color: #fff; cursor: pointer; }
     .team-card.drink-team    .card-header { background: #800080; }
     .team-card.cepilla       .card-header { background: #808080; }
     .team-card.recreativo    .card-header { background: #FFD700; color: #4A2C2A; }
     .team-card.borussia      .card-header { background: #00CCCC; }
-
     .team-card .card-body { display: none; padding: 10px; }
     .team-card.active .card-body { display: block; }
-
     .lineup { display: flex; flex-direction: column; align-items: center; gap: 10px; }
     .defense, .midfield { display: flex; gap: 10px; justify-content: center; }
     .position {
@@ -191,13 +173,46 @@
     }
 
     /* Comparar Jugadores */
-    #sectionComparar {
-      text-align: center; padding: 20px;
-      font: bold 1.8em 'Courier New', monospace; color: #4A2C2A;
+    #compareContainer {
+      text-align: center;
+      margin-bottom: 20px;
+      font: bold 1.8em 'Courier New', monospace;
+      color: #4A2C2A;
+    }
+    #compareContainer select,
+    #compareContainer button {
+      font-family: 'Poppins', sans-serif;
+      font-weight: 600;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      padding: 6px 10px;
+      background: #fff;
+      color: #4A2C2A;
+      box-shadow: inset 1px 1px 3px rgba(0,0,0,0.1);
+      cursor: pointer;
+      margin: 0 10px 10px;
+    }
+    #compareResult table {
+      margin: 20px auto;
+      width: 90%;
+      border-collapse: collapse;
+    }
+    #compareResult th,
+    #compareResult td {
+      border: 1px solid #ddd;
+      padding: 8px;
+      text-align: center;
+    }
+    #compareResult thead {
+      background: #4A2C2A;
+      color: #fff;
     }
 
-    /* Pop‑ups de jugador */
-    .player-link { color: inherit; text-decoration: none; cursor: pointer; }
+    /* Evitar color azul en links de jugador */
+    .player-link {
+      color: inherit !important;
+      text-decoration: none !important;
+    }
     .player-link:hover { text-decoration: underline; }
 
     /* Modal */
@@ -230,6 +245,7 @@
       header h1 { font-size:2em; }
       .nav-container button { padding:10px 20px; font-size:14px; }
       #sectionClasificacion table { font-size:13px; }
+      #compareContainer { font-size:1.2em; }
     }
   </style>
 </head>
@@ -351,7 +367,7 @@
             <div class="position delantero"><a href="#" class="player-link" data-player="Alex F.">Alex F.</a></div>
           </div>
         </div>
-      </div>
+      </div>  
       <!-- BORUSSIA DONUTS -->
       <div class="team-card borussia">
         <div class="card-header">BORUSSIA DONUTS</div>
@@ -377,7 +393,14 @@
   <!-- Comparar Jugadores -->
   <section id="sectionComparar">
     <h2>Comparar Jugadores</h2>
-    <p>COMING SOON</p>
+    <div id="compareContainer">
+      <label for="player1">Jugador 1:</label>
+      <select id="player1"><option value="">Seleccione...</option></select>
+      <label for="player2">Jugador 2:</label>
+      <select id="player2"><option value="">Seleccione...</option></select>
+      <button id="compareBtn">Comparar</button>
+    </div>
+    <div id="compareResult"></div>
   </section>
 
   <!-- Modal de Perfil de Jugador -->
@@ -394,41 +417,43 @@
     </div>
   </div>
 
-  <!-- JavaScript -->
+  <!-- GLOBAL profiles para todos los scripts -->
+  <script>
+    const profiles = {
+      "Fran":  { team:"DRINK TEAM",    pos:"Portero" },
+      "Raul":  { team:"DRINK TEAM",    pos:"Defensa" },
+      "Juan":  { team:"DRINK TEAM",    pos:"Defensa" },
+      "Alvaro":{ team:"DRINK TEAM",    pos:"Defensa" },
+      "Lay":   { team:"DRINK TEAM",    pos:"Mediocampista" },
+      "Kuki":  { team:"DRINK TEAM",    pos:"Mediocampista" },
+      "Nacho": { team:"DRINK TEAM",    pos:"Delantero" },
+      "Sami":  { team:"CEPILLA FC",    pos:"Portero" },
+      "Marko": { team:"CEPILLA FC",    pos:"Defensa" },
+      "HDG":   { team:"CEPILLA FC",    pos:"Defensa" },
+      "Mariankas":{team:"CEPILLA FC",  pos:"Defensa"},
+      "Juan L":{ team:"CEPILLA FC",    pos:"Mediocampista" },
+      "Nestor":{ team:"CEPILLA FC",    pos:"Mediocampista" },
+      "Curro": { team:"CEPILLA FC",    pos:"Delantero" },
+      "Antonio":{team:"RECREATIVO DE JUERGA",pos:"Portero"},
+      "Viktor":{ team:"RECREATIVO DE JUERGA",pos:"Defensa"},
+      "Leo":   { team:"RECREATIVO DE JUERGA",pos:"Defensa"},
+      "Robles":{ team:"RECREATIVO DE JUERGA",pos:"Defensa"},
+      "Victor":{ team:"RECREATIVO DE JUERGA",pos:"Mediocampista"},
+      "Juanma":{ team:"RECREATIVO DE JUERGA",pos:"Mediocampista"},
+      "Alex F.":{team:"RECREATIVO DE JUERGA",pos:"Delantero"},
+      "Adri":  { team:"BORUSSIA DONUTS",pos:"Portero"},
+      "Niko":  { team:"BORUSSIA DONUTS",pos:"Defensa"},
+      "Carlos":{ team:"BORUSSIA DONUTS",pos:"Defensa"},
+      "Alcaina":{team:"BORUSSIA DONUTS",pos:"Defensa"},
+      "Esteban":{team:"BORUSSIA DONUTS",pos:"Mediocampista"},
+      "Alvaro":{ team:"BORUSSIA DONUTS",pos:"Mediocampista"},
+      "Fer":   { team:"BORUSSIA DONUTS",pos:"Delantero"}
+    };
+  </script>
+
+  <!-- JavaScript principal -->
   <script>
     document.addEventListener("DOMContentLoaded", ()=> {
-      // Datos de perfil de todos los jugadores
-      const profiles = {
-        "Fran":  { team:"DRINK TEAM",    pos:"Portero" },
-        "Raul":  { team:"DRINK TEAM",    pos:"Defensa" },
-        "Juan":  { team:"DRINK TEAM",    pos:"Defensa" },
-        "Alvaro":{ team:"DRINK TEAM",    pos:"Defensa" },
-        "Lay":   { team:"DRINK TEAM",    pos:"Mediocampista" },
-        "Kuki":  { team:"DRINK TEAM",    pos:"Mediocampista" },
-        "Nacho": { team:"DRINK TEAM",    pos:"Delantero" },
-        "Sami":  { team:"CEPILLA FC",    pos:"Portero" },
-        "Marko": { team:"CEPILLA FC",    pos:"Defensa" },
-        "HDG":   { team:"CEPILLA FC",    pos:"Defensa" },
-        "Mariankas":{team:"CEPILLA FC",  pos:"Defensa" },
-        "Juan L":{ team:"CEPILLA FC",    pos:"Mediocampista" },
-        "Nestor":{ team:"CEPILLA FC",    pos:"Mediocampista" },
-        "Curro": { team:"CEPILLA FC",    pos:"Delantero" },
-        "Antonio":{team:"RECREATIVO DE JUERGA",pos:"Portero"},
-        "Viktor":{ team:"RECREATIVO DE JUERGA",pos:"Defensa"},
-        "Leo":   { team:"RECREATIVO DE JUERGA",pos:"Defensa"},
-        "Robles":{ team:"RECREATIVO DE JUERGA",pos:"Defensa"},
-        "Victor":{ team:"RECREATIVO DE JUERGA",pos:"Mediocampista"},
-        "Juanma":{ team:"RECREATIVO DE JUERGA",pos:"Mediocampista"},
-        "Alex F.":{team:"RECREATIVO DE JUERGA",pos:"Delantero"},
-        "Adri":  { team:"BORUSSIA DONUTS",pos:"Portero"},
-        "Niko":  { team:"BORUSSIA DONUTS",pos:"Defensa"},
-        "Carlos":{ team:"BORUSSIA DONUTS",pos:"Defensa"},
-        "Alcaina":{team:"BORUSSIA DONUTS",pos:"Defensa"},
-        "Esteban":{team:"BORUSSIA DONUTS",pos:"Mediocampista"},
-        "Alvaro":{ team:"BORUSSIA DONUTS",pos:"Mediocampista"},
-        "Fer":   { team:"BORUSSIA DONUTS",pos:"Delantero"}
-      };
-
       // Estadísticas fijas
       const statsPlayers = [
         {name:"Viktor",color:"#FFD700"},
@@ -444,10 +469,10 @@
         {name:"Adri",color:"#00CCCC"}
       ];
       function fillList(id, list) {
-        const ul=document.getElementById(id);
-        ul.innerHTML="";
-        list.forEach(p=>{
-          ul.innerHTML+=`<li><span style="background:${p.color}"></span>
+        const ul = document.getElementById(id);
+        ul.innerHTML = '';
+        list.forEach(p => {
+          ul.innerHTML += `<li><span style="background:${p.color}"></span>
             <a href="#" class="player-link" data-player="${encodeURIComponent(p.name)}">${p.name}</a>: 0</li>`;
         });
       }
@@ -480,62 +505,124 @@
         buttons.eqp.textContent="Equipos";
         buttons.cmp.textContent="Comparar Jugadores";
       }
-      buttons.cls.onclick=()=>{
+      buttons.cls.onclick = ()=>{
         hideAll();
         sections.cls.classList.toggle("visible");
-        buttons.cls.textContent=sections.cls.classList.contains("visible")?"Ocultar Clasificación":"Clasificación";
+        buttons.cls.textContent = sections.cls.classList.contains("visible") ? "Ocultar Clasificación" : "Clasificación";
       };
-      buttons.std.onclick=()=>{
+      buttons.std.onclick = ()=>{
         hideAll();
         sections.std.classList.toggle("visible");
-        buttons.std.textContent=sections.std.classList.contains("visible")?"Ocultar Estadísticas":"Estadísticas";
+        buttons.std.textContent = sections.std.classList.contains("visible") ? "Ocultar Estadísticas" : "Estadísticas";
       };
-      buttons.nws.onclick=()=>{
+      buttons.nws.onclick = ()=>{
         hideAll();
         sections.nws.classList.toggle("visible");
-        buttons.nws.textContent=sections.nws.classList.contains("visible")?"Ocultar Noticias":"Noticias";
+        buttons.nws.textContent = sections.nws.classList.contains("visible") ? "Ocultar Noticias" : "Noticias";
       };
-      buttons.eqp.onclick=()=>{
+      buttons.eqp.onclick = ()=>{
         hideAll();
         sections.eqp.classList.toggle("visible");
-        buttons.eqp.textContent=sections.eqp.classList.contains("visible")?"Ocultar Equipos":"Equipos";
+        buttons.eqp.textContent = sections.eqp.classList.contains("visible") ? "Ocultar Equipos" : "Equipos";
       };
-      buttons.cmp.onclick=()=>{
+      buttons.cmp.onclick = ()=>{
         hideAll();
         sections.cmp.classList.toggle("visible");
-        buttons.cmp.textContent=sections.cmp.classList.contains("visible")?"Ocultar Comparar Jugadores":"Comparar Jugadores";
+        buttons.cmp.textContent = sections.cmp.classList.contains("visible") ? "Ocultar Comparar Jugadores" : "Comparar Jugadores";
       };
 
       // Cards colapsables
       document.querySelectorAll(".team-card .card-header").forEach(h=>{
-        h.addEventListener("click",e=>{
+        h.addEventListener("click", e=>{
           e.stopPropagation();
-          const card=h.parentElement;
+          const card = h.parentElement;
           document.querySelectorAll(".team-card").forEach(c=>{ if(c!==card) c.classList.remove("active"); });
           card.classList.toggle("active");
         });
       });
 
-      // Modal de jugador
+      // Modal de perfil
       const modal = document.getElementById("profileModal");
       const nameEl = document.getElementById("modalName");
       const teamEl = document.getElementById("modalTeam");
       const posEl  = document.getElementById("modalPosition");
       const imgEl  = document.getElementById("modalImg");
-      document.addEventListener("click",e=>{
+      document.addEventListener("click", e=>{
         if(e.target.classList.contains("player-link")) {
           e.preventDefault(); e.stopPropagation();
-          const player=decodeURIComponent(e.target.dataset.player);
-          const prof=profiles[player];
-          nameEl.textContent=player;
-          teamEl.textContent=prof? prof.team : "—";
-          posEl.textContent =prof? prof.pos  : "—";
-          imgEl.src="https://via.placeholder.com/200";
-          modal.style.display="flex";
+          const player = decodeURIComponent(e.target.dataset.player);
+          const prof = profiles[player];
+          nameEl.textContent = player;
+          teamEl.textContent = prof? prof.team : "—";
+          posEl.textContent  = prof? prof.pos  : "—";
+          imgEl.src = "https://via.placeholder.com/200";
+          modal.style.display = "flex";
         }
       });
       document.querySelector(".modal-close").onclick = ()=> modal.style.display="none";
       window.onclick = evt=> { if(evt.target===modal) modal.style.display="none"; };
+    });
+  </script>
+
+  <!-- Script Comparar Jugadores -->
+  <script>
+    document.addEventListener("DOMContentLoaded", ()=> {
+      const select1    = document.getElementById('player1');
+      const select2    = document.getElementById('player2');
+      const compareBtn = document.getElementById('compareBtn');
+      const resultDiv  = document.getElementById('compareResult');
+
+      // Poblar selects
+      Object.keys(profiles).forEach(name => {
+        const o1 = document.createElement('option');
+        o1.value = name; o1.textContent = name;
+        select1.appendChild(o1);
+        const o2 = o1.cloneNode(true);
+        select2.appendChild(o2);
+      });
+
+      // Extraer stats
+      function getPlayerStats(name) {
+        const stats = {};
+        const cats = [
+          { id:'ulGoles',             label:'Goles' },
+          { id:'ulAsistencias',       label:'Asistencias' },
+          { id:'ulTarjetasAmarillas', label:'Tarjetas Amarillas' },
+          { id:'ulTarjetasRojas',     label:'Tarjetas Rojas' },
+          { id:'ulGolesRecibidos',    label:'Goles Recibidos' }
+        ];
+        cats.forEach(c=>{
+          const ul = document.getElementById(c.id);
+          const li = Array.from(ul.children)
+                    .find(li=> li.textContent.includes(name)) || { textContent:'' };
+          const m = li.textContent.match(/: (\d+)/);
+          stats[c.label] = m? parseInt(m[1]) : 0;
+        });
+        return stats;
+      }
+
+      // Comparar al click
+      compareBtn.addEventListener('click', ()=>{
+        const p1 = select1.value, p2 = select2.value;
+        if(!p1 || !p2) { alert('Seleccione ambos jugadores.'); return; }
+        const s1 = getPlayerStats(p1), s2 = getPlayerStats(p2);
+
+        let html = '<h3>Resultado de la Comparación</h3>'
+                 + '<table><thead><tr>'
+                 + '<th>Estadística</th>'
+                 + `<th>${p1}</th>`
+                 + `<th>${p2}</th>`
+                 + '</tr></thead><tbody>';
+        Object.keys(s1).forEach(key=>{
+          html += '<tr>'
+               + `<td>${key}</td>`
+               + `<td>${s1[key]}</td>`
+               + `<td>${s2[key]}</td>`
+               + '</tr>';
+        });
+        html += '</tbody></table>';
+        resultDiv.innerHTML = html;
+      });
     });
   </script>
 
