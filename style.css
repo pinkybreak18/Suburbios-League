@@ -20,4 +20,12 @@
     border-radius: 20px;
     background-color: #f8f1ec;
   }
+.player-name {
+  display: block;
+  margin-top: 5px;
+  font-size: 0.9em;
+  font-weight: 600;
+  color: #4A2C2A;
+  text-align: center;
+}
 }
