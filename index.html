@@ -10,6 +10,24 @@
   <!-- Google Fonts: Poppins -->
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
   <style>
+.news-images {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+.news-images img {
+  width: calc(50% - 5px);
+  height: auto;
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+@media (max-width: 600px) {
+  .news-images img {
+    width: 100%;
+  }
+}
+
     /* ===== Estilos generales ===== */
     body {
       font-family: 'Poppins', sans-serif;
@@ -305,9 +323,12 @@
 
   <!-- Noticias -->
   <section id="sectionNoticias">
-    <h2>Noticias</h2>
-    <ul><li>COMING SOON</li></ul>
-  </section>
+  <h2>Noticias</h2>
+  <div class="news-images">
+    <img src="periodico1.jpg" alt="Portada periódico 1">
+    <img src="periodico2.jpg" alt="Portada periódico 2">
+  </div>
+</section>
 
   <!-- Equipos -->
   <section id="sectionEquipos">
