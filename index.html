@@ -275,17 +275,17 @@
         <tr><th>Equipo</th><th>PJ</th><th>GF</th><th>GC</th><th>PTS</th></tr>
       </thead>
       <tbody>
-        <tr class="drink-team">
-          <td class="team-name"><span class="color-indicator"></span>DRINK TEAM</td><td>0</td><td>0</td><td>0</td><td>0</td>
-        </tr>
         <tr class="cepilla">
-          <td class="team-name"><span class="color-indicator"></span>CEPILLA FC</td><td>0</td><td>0</td><td>0</td><td>0</td>
+          <td class="team-name"><span class="color-indicator"></span>CEPILLA FC</td><td>1</td><td>8</td><td>1</td><td>3</td>
         </tr>
         <tr class="recreativo">
-          <td class="team-name"><span class="color-indicator"></span>RECREATIVO DE JUERGA</td><td>0</td><td>0</td><td>0</td><td>0</td>
+          <td class="team-name"><span class="color-indicator"></span>RECREATIVO DE JUERGA</td><td>1</td><td>1</td><td>2</td><td>0</td>
         </tr>
         <tr class="borussia">
-          <td class="team-name"><span class="color-indicator"></span>BORUSSIA DONUTS</td><td>0</td><td>0</td><td>0</td><td>0</td>
+          <td class="team-name"><span class="color-indicator"></span>BORUSSIA DONUTS</td><td>1</td><td>2</td><td>1</td><td>0</td>
+        </tr>
+ <tr class="drink-team">
+          <td class="team-name"><span class="color-indicator"></span>DRINK TEAM</td><td>1</td><td>1</td><td>8</td><td>0</td>
         </tr>
       </tbody>
     </table>
@@ -421,10 +421,6 @@
         <strong>Equipo:</strong> <span id="modalTeam"></span><br>
         <strong>Posición:</strong> <span id="modalPosition"></span>
       </p>
-<div id="modalStats">
-  <h2>Estadísticas</h2>
-  <ul id="modalStatsList"></ul>
-</div>
           </div>
   </div>
 
@@ -466,33 +462,66 @@
   <script>
     document.addEventListener("DOMContentLoaded", ()=> {
       // Estadísticas fijas
-      const statsPlayers = [
-        {name:"Viktor",color:"#FFD700"},
-        {name:"Juan L",color:"#808080"},
-        {name:"Raul",color:"#800080"},
-        {name:"Curro",color:"#808080"},
-        {name:"Fer",color:"#00CCCC"}
-      ];
-      const keepers = [
-        {name:"Fran",color:"#800080"},
-        {name:"Sami",color:"#808080"},
-        {name:"Antonio",color:"#FFD700"},
-        {name:"Adri",color:"#00CCCC"}
-      ];
-      function fillList(id, list) {
-        const ul = document.getElementById(id);
-        ul.innerHTML = '';
-        list.forEach(p => {
-          ul.innerHTML += `<li><span style="background:${p.color}"></span>
-            <a href="#" class="player-link" data-player="${encodeURIComponent(p.name)}">${p.name}</a>: 0</li>`;
-        });
-      }
-      fillList("ulGoles", statsPlayers);
-      fillList("ulAsistencias", statsPlayers);
-      fillList("ulTarjetasAmarillas", statsPlayers);
-      fillList("ulTarjetasRojas", statsPlayers);
-      fillList("ulGolesRecibidos", keepers);
+      // —– Reemplaza todo este bloque —–
+// —– Reemplaza todo este bloque —–
+// Goles (orden descendente)
+const statsPlayers = [
+  { name: "HDG",    color: "#808080", stat: 3 },
+  { name: "Marko",  color: "#808080", stat: 2 },
+  { name: "Esteban",color: "#00CCCC", stat: 2 },
+  { name: "Victor", color: "#FFD700", stat: 1 },
+  { name: "Curro",  color: "#808080", stat: 1 },
+  { name: "Juan L", color: "#808080", stat: 1 },
+  { name: "Nestor", color: "#808080", stat: 1 }
+];
 
+// Asistencias (orden descendente)
+const assistPlayers = [
+  { name: "Nestor", color: "#808080", stat: 3 },
+  { name: "Juan L", color: "#808080", stat: 2 },
+  { name: "Curro",  color: "#808080", stat: 1 },
+  { name: "Niko",   color: "#00CCCC", stat: 1 },
+  { name: "Leo",    color: "#FFD700", stat: 1 }
+];
+
+// Goles recibidos (orden ASCendente: menos goles recibidos primero)
+const keepers = [
+  { name: "Sami",    color: "#808080", stat: 1 },
+  { name: "Adri",    color: "#00CCCC", stat: 1 },
+  { name: "Antonio", color: "#FFD700", stat: 2 },
+  { name: "Fran",    color: "#800080", stat: 8 }
+];
+
+// Tarjetas amarillas (orden descendente)
+const yellowCards = [
+  { name: "Fran", color: "#800080", stat: 1 },
+  { name: "Raul", color: "#800080", stat: 1 }
+];
+// —– Hasta aquí —––
+
+// Función que pinta cada lista usando la propiedad `stat`
+function fillList(id, list) {
+  const ul = document.getElementById(id);
+  ul.innerHTML = "";
+  list.forEach(p => {
+    ul.innerHTML += `
+      <li>
+        <span style="
+          background:${p.color};
+          width:10px;height:10px;
+          display:inline-block;
+          border-radius:50%;
+        "></span>
+        ${p.name}: ${p.stat}
+      </li>`;
+  });
+}
+
+// Ahora invocas fillList con los arrays adecuados:
+fillList("ulGoles", statsPlayers);
+fillList("ulAsistencias", assistPlayers);
+fillList("ulGolesRecibidos", keepers);
+fillList("ulTarjetasAmarillas", yellowCards);
       // Secciones y botones
       const sections = {
         cls: document.getElementById("sectionClasificacion"),
