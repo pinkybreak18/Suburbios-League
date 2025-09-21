@@ -144,26 +144,51 @@
     .borussia .color-indicator      { background: #00FFFF; }
 
     /* Estadísticas */
+       /* Estadísticas (tarjetas colapsables) */
     .stats-container {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(180px,1fr));
       gap: 15px;
     }
+
     .stat-card {
       background: linear-gradient(145deg,#fff,#f9f9f9);
       border: 1px solid #ddd;
       border-radius: 5px;
-      padding: 15px;
-      text-align: center;
+      overflow: hidden;
       box-shadow: 2px 2px 5px rgba(74,44,42,0.15);
       transition: transform .2s;
     }
-    .stat-card:hover { transform: translateY(-5px); }
-    .stat-card h3 { margin: 0 0 10px; color: #4A2C2A; font-size: 20px; }
-    .stat-card ul { list-style: none; padding: 0; }
+    .stat-card:hover { transform: translateY(-3px); }
+
+    .stat-card .card-header {
+      padding: 12px 15px;
+      font-size: 18px;
+      font-weight: 700;
+      color: #4A2C2A;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: linear-gradient(145deg,#fff,#f3f3f3);
+    }
+    .stat-card .card-header .chev {
+      transition: transform .25s;
+      font-size: 18px;
+      line-height: 1;
+    }
+    .stat-card .card-body {
+      display: none;
+      padding: 12px 15px;
+      text-align: left;
+    }
+    .stat-card.active .card-body { display: block; }
+    .stat-card.active .card-header .chev { transform: rotate(180deg); }
+
+    .stat-card ul { list-style: none; padding: 0; margin: 0; }
     .stat-card li {
       display: flex; align-items: center; gap: 8px;
-      font-size: 18px; font-weight: 600; color: #4A2C2A; margin: 5px 0;
+      font-size: 16px; font-weight: 600; color: #4A2C2A; margin: 6px 0;
     }
     .stat-card li span { width: 10px; height: 10px; border-radius: 50%; display: inline-block; }
 
@@ -314,11 +339,30 @@
   <section id="sectionEstadisticas">
     <h2>Estadísticas</h2>
     <div class="stats-container">
-      <div class="stat-card"><h3>Goles</h3><ul id="ulGoles"></ul></div>
-      <div class="stat-card"><h3>Asistencias</h3><ul id="ulAsistencias"></ul></div>
-      <div class="stat-card"><h3>Goles Recibidos</h3><ul id="ulGolesRecibidos"></ul></div>
-      <div class="stat-card"><h3>Tarjetas Amarillas</h3><ul id="ulTarjetasAmarillas"></ul></div>
-      <div class="stat-card"><h3>Tarjetas Rojas</h3><ul id="ulTarjetasRojas"></ul></div>
+      <div class="stat-card">
+        <div class="card-header">Goles <span class="chev">▾</span></div>
+        <div class="card-body"><ul id="ulGoles"></ul></div>
+      </div>
+
+      <div class="stat-card">
+        <div class="card-header">Asistencias <span class="chev">▾</span></div>
+        <div class="card-body"><ul id="ulAsistencias"></ul></div>
+      </div>
+
+      <div class="stat-card">
+        <div class="card-header">Goles Recibidos <span class="chev">▾</span></div>
+        <div class="card-body"><ul id="ulGolesRecibidos"></ul></div>
+      </div>
+
+      <div class="stat-card">
+        <div class="card-header">Tarjetas Amarillas <span class="chev">▾</span></div>
+        <div class="card-body"><ul id="ulTarjetasAmarillas"></ul></div>
+      </div>
+
+      <div class="stat-card">
+        <div class="card-header">Tarjetas Rojas <span class="chev">▾</span></div>
+        <div class="card-body"><ul id="ulTarjetasRojas"></ul></div>
+      </div>
     </div>
   </section>
 
@@ -612,12 +656,15 @@ fillList("ulTarjetasAmarillas", yellowCards);
       };
 
       // Cards colapsables
-      document.querySelectorAll(".team-card .card-header").forEach(h=>{
+            // Cards colapsables (equipos + estadísticas)
+      document.querySelectorAll(".team-card .card-header, .stat-card .card-header").forEach(h=>{
         h.addEventListener("click", e=>{
           e.stopPropagation();
           const card = h.parentElement;
-          document.querySelectorAll(".team-card").forEach(c=>{ if(c!==card) c.classList.remove("active"); });
-          card.classList.toggle("active");
+          // determinamos a qué grupo pertenece para cerrar sólo las cartas de ese grupo
+          const groupSelector = card.classList.contains('team-card') ? '.team-card' : '.stat-card';
+          document.querySelectorAll(groupSelector).forEach(c=>{ if(c !== card) c.classList.remove('active'); });
+          card.classList.toggle('active');
         });
       });
 
