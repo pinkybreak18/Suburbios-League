@@ -97,10 +97,11 @@
       transition: max-height .5s ease-out, opacity .5s;
     }
     section.visible {
-      max-height: 1000px;
-      opacity: 1;
-      padding: 20px;
-    }
+  max-height: none;      /* que no limite la altura */
+  opacity: 1;
+  padding: 20px;
+  overflow-y: auto;      /* permite hacer scroll si es necesario */
+}
     section h2 {
       margin-top: 0;
       color: #4A2C2A;
