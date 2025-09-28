@@ -319,17 +319,17 @@
         <tr><th>Equipo</th><th>PJ</th><th>GF</th><th>GC</th><th>PTS</th></tr>
       </thead>
        <tbody>
-        <tr class="borussia">
-          <td class="team-name"><span class="color-indicator"></span>BORUSSIA DONUTS</td><td>2</td><td>5</td><td>4</td><td>4</td>
-        </tr>
-      <tr class="recreativo">
-          <td class="team-name"><span class="color-indicator"></span>RECREATIVO DE JUERGA</td><td>2</td><td>5</td><td>3</td><td>3</td>
+    	 <tr class="recreativo">
+          <td class="team-name"><span class="color-indicator"></span>RECREATIVO DE JUERGA</td><td>3</td><td>9</td><td>6</td><td>6</td>
         </tr>
          <tr class="cepilla">
-          <td class="team-name"><span class="color-indicator"></span>CEPILLA FC</td><td>2</td><td>9</td><td>5</td><td>3</td>
+          <td class="team-name"><span class="color-indicator"></span>CEPILLA FC</td><td>3</td><td>18</td><td>9</td><td>6</td>
         </tr>
- <tr class="drink-team">
-          <td class="team-name"><span class="color-indicator"></span>DRINK TEAM</td><td>2</td><td>4</td><td>11</td><td>1</td>
+	<tr class="borussia">
+          <td class="team-name"><span class="color-indicator"></span>BORUSSIA DONUTS</td><td>3</td><td>9</td><td>13</td><td>4</td>
+        </tr>
+	 <tr class="drink-team">
+          <td class="team-name"><span class="color-indicator"></span>DRINK TEAM</td><td>3</td><td>7</td><td>15h</td><td>1</td>
         </tr>
       </tbody>
     </table>
@@ -539,49 +539,63 @@
 // —– Reemplaza todo este bloque —–
 // Goles (orden descendente)
 const statsPlayers = [
-  { name: "Carlos F", color: "#FFD700", stat: 3 },
-  { name: "HDG",    color: "#808080", stat: 3 },
-  { name: "Esteban",color: "#00CCCC", stat: 3 },
-  { name: "Marko",  color: "#808080", stat: 2 },
-  { name: "Victor", color: "#FFD700", stat: 2 },
+  { name: "HDG",    color: "#808080", stat: 5 },
+{ name: "Victor", color: "#FFD700", stat: 5 },
+{ name: "Nacho", color: "#800080", stat: 4 },
+  { name: "Esteban", color: "#00CCCC", stat: 4 },
+{ name: "Carlos F", color: "#FFD700", stat: 3 },
+  { name: "Marko",  color: "#808080", stat: 3 },
+{ name: "Juan L", color: "#808080", stat: 3 },
   { name: "Curro",  color: "#808080", stat: 2 },
-  { name: "Juan L", color: "#808080", stat: 1 },
-  { name: "Nestor", color: "#808080", stat: 1 },
-  { name: "Lay", color: "#800080", stat: 1 },
+  { name: "Nestor", color: "#808080", stat: 2 },
+  { name: "Lay", color: "#800080", stat: 2 },
+  { name: "Álvaro", color: "#00CCCC", stat: 2 },
   { name: "Álvaro G", color: "#800080", stat: 1 },
-  { name: "Álvaro", color: "#00CCCC", stat: 1 },
-  { name: "Alcaina", color: "#00CCCC", stat: 1 }
+  { name: "Alcaina", color: "#00CCCC", stat: 1 },
+{ name: "Kuki", color: "#800080", stat: 1 },
+  { name: "Fer", color: "#00CCCC", stat: 1 }
+
+
 
 ];
 
 // Asistencias (orden descendente)
 const assistPlayers = [
-  { name: "Nestor", color: "#808080", stat: 3 },
-  { name: "Juan L", color: "#808080", stat: 3 },
+  { name: "Nestor", color: "#808080", stat: 6 },
+  { name: "Juan L", color: "#808080", stat: 4 },
+  { name: "Nacho",   color: "#800080", stat: 3 },
   { name: "Víctor",    color: "#FFD700", stat: 2 },
+  { name: "Carlos",   color: "#00CCCC", stat: 2 },
+{ name: "Antonio",    color: "#FFD700", stat: 2 },
   { name: "Curro",  color: "#808080", stat: 1 },
   { name: "Niko",   color: "#00CCCC", stat: 1 },
-  { name: "Carlos",   color: "#00CCCC", stat: 1 },
   { name: "Álvaro G",   color: "#800080", stat: 1 },
   { name: "Lay",   color: "#800080", stat: 1 },
+  { name: "Raúl",   color: "#800080", stat: 1 },
   { name: "Leo",    color: "#FFD700", stat: 1 },
-  { name: "Víktor",    color: "#FFD700", stat: 1 },
+  { name: "HDG",  color: "#808080", stat: 1 },
+  { name: "Esteban",   color: "#00CCCC", stat: 1 },
+  { name: "Alvaro",   color: "#00CCCC", stat: 1 },
+  { name: "Víktor",    color: "#FFD700", stat: 1 }
 ];
 
 
 // Promedio de gol (orden ASCendente: menos goles recibidos primero)
 const keepers = [
-  { name: "Antonio", color: "#FFD700", stat: 2 },
-  { name: "Adri",    color: "#00CCCC", stat: 4 },
-  { name: "Sami",    color: "#808080", stat: 5 },
-  { name: "Fran",    color: "#800080", stat: 11 }
+  { name: "Antonio", color: "#FFD700", stat: 5 },
+  { name: "Sami",    color: "#808080", stat: 9 },
+  { name: "Adri",    color: "#00CCCC", stat: 13 },
+  { name: "Fran",    color: "#800080", stat: 15 }
 ];
 
 // Tarjetas amarillas (orden descendente)
 const yellowCards = [
   { name: "Fran", color: "#800080", stat: 1 },
   { name: "Sami",    color: "#808080", stat: 1 },
-  { name: "Raul", color: "#800080", stat: 1 }
+  { name: "Raul", color: "#800080", stat: 1 },
+  { name: "Nestor",    color: "#808080", stat: 1 }
+
+
 ];
 // —– Hasta aquí —––
 
